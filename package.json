@@ -9,6 +9,7 @@
   "scripts": {
     "open": "google-chrome-stable ./example/index.html",
     "build": "babel src/index.js --presets es2015 --out-file blitzr.js && uglifyjs blitzr.js -o blitzr.min.js",
+    "watch": "babel src/index.js --watch --presets es2015 --out-file blitzr.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
