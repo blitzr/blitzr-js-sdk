@@ -1,5 +1,4 @@
 (function() {
-    'use strict';
 
     class BlitzrPlayer {
         constructor(target, options = {}) {
@@ -8,30 +7,61 @@
                 throw new Error('target not found')
             }
 
+            this._id = new Date().getTime()
             this._src = ''
             this._el.innerHTML = `<iframe src="${this._src}" scrolling="no" frameborder="no"></iframe>`
 
             this._iframe = this._el.firstElementChild
             this._iframe.onload = (event) => {
-                this._postToIframe('blitzr_connect')
+                if (this._iframe.getAttribute('src')) {
+                    this._postToIframe({
+                        command: 'blitzr_connect',
+                        extra: this._id
+                    })
+                    this._loaded = true
+                } else {
+                    this._loaded = false
+                }
             }
+
+            window.addEventListener('message', (e) => {
+                try {
+                    const data = JSON.parse(e.data)
+                    if (data.identifier === this._id) {
+                        switch (data.status) {
+                            case 'blitzr_playing':
+                            this.currentTime = data.time
+                            break
+                        }
+                    }
+                } catch(err) {
+                    return false
+                }
+
+            })
         }
 
         _postToIframe(message) {
-            this._iframe.contentWindow.postMessage(message, this._src)
+            this._iframe.contentWindow.postMessage(JSON.stringify(message), this._src)
         }
 
         load(track) {
-            this._src = `http://player.blitzr.com/${track}`
+            this._src = `http://play.blitzrr.net/${track}?t=${this._id}`
+            // this._src = `http://player.blitzr.com/${track}?t=${this._id}`
+            // this._src = `http://192.168.1.20:9000/${track}?t=${this._id}`
             this._iframe.setAttribute('src', this._src)
         }
 
         play() {
-            this._postToIframe('blitzr_play')
+            this._postToIframe({
+                command : 'blitzr_play'
+            })
         }
 
         pause() {
-            this._postToIframe('blitzr_pause')
+            this._postToIframe({
+                command : 'blitzr_pause'
+            })
         }
 
         stop() {
@@ -39,43 +69,12 @@
         }
 
         seekTo(time) {
-            const data = {
+            this._postToIframe({
                 command: 'blitzr_seek',
                 extra: time
-            }
-            this._postToIframe(JSON.stringify(data))
-        }
-
-        get currentTime() {
-            return this.currentTime
-        }
-
-        get duration() {
-            return this.duration
+            })
         }
     }
-
-    // window.addEventListener('message', function(e) {
-    //     try {
-    //         var msg = JSON.parse(e.data)
-    //         switch (msg.status) {
-    //             case 'blitzr_playing':
-    //                 break
-    //             case 'blitzr_paused':
-    //                 break
-    //             case 'blitzr_ended':
-    //                 break
-    //             case 'blitzr_error':
-    //                 break
-    //             case 'blitzr_no_sources':
-    //                 break
-    //             default:
-    //                 break
-    //         }
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // })
 
     class Blitzr {
         constructor() {
