@@ -2,7 +2,7 @@
   "name": "blitzr-js-sdk",
   "version": "0.0.0",
   "description": "SDK javascript for blitzr API",
-  "main": "index.js",
+  "main": "blitzr.js",
   "directories": {
     "example": "example"
   },
