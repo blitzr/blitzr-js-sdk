@@ -14,19 +14,23 @@
 
     class BlitzrPlayer {
         constructor(target, options = defaultOptions) {
+            // Select DOM element
             this._el = document.getElementById(target)
             if (!this._el) {
                 throw new Error('target not found')
             }
 
+            // Init parameters
             this._id = new Date().getTime()
             this._src = ''
             this._options = Object.assign({}, defaultOptions, options)
             this._el.innerHTML = `<iframe src="${this._src}" width="${this._options.width}" height="${this._options.height}" scrolling="no" frameborder="no"></iframe>`
             this.volume = options.initVolume
+            this._loaded = false
             this._isPaused = true
-
             this._iframe = this._el.firstElementChild
+
+            // Subscrib to iframe
             this._iframe.onload = (event) => {
                 if (this._iframe.getAttribute('src')) {
                     this._postToIframe({
@@ -39,6 +43,7 @@
                 }
             }
 
+            // Lisent events
             window.addEventListener('message', (e) => {
                 try {
                     const data = JSON.parse(e.data)
@@ -65,7 +70,6 @@
                 } catch(err) {
                     return false
                 }
-
             })
         }
 
