@@ -1,5 +1,7 @@
 (function() {
     const defaultOptions = {
+        width: 200,
+        heigth: 200,
         initVolume: 100,
         onPlay() {},
         onPause() {},
@@ -19,9 +21,9 @@
 
             this._id = new Date().getTime()
             this._src = ''
-            this._el.innerHTML = `<iframe src="${this._src}" scrolling="no" frameborder="no"></iframe>`
-            this.volume = options.initVolume
             this._options = Object.assign({}, defaultOptions, options)
+            this._el.innerHTML = `<iframe src="${this._src}" width="${this._options.width}" height="${this._options.height}" scrolling="no" frameborder="no"></iframe>`
+            this.volume = options.initVolume
             this._isPaused = true
 
             this._iframe = this._el.firstElementChild
