@@ -1,6 +1,13 @@
 (function() {
     const defaultOptions = {
-        initVolume: 100
+        initVolume: 100,
+        onPlay() {},
+        onPause() {},
+        onLoad() {},
+        onSeekTo() {},
+        onSetVolume() {},
+        onStop() {},
+        onEnd() {}
     }
 
     class BlitzrPlayer {
@@ -13,7 +20,9 @@
             this._id = new Date().getTime()
             this._src = ''
             this._el.innerHTML = `<iframe src="${this._src}" scrolling="no" frameborder="no"></iframe>`
-            this._volume = options.initVolume
+            this.volume = options.initVolume
+            this._options = Object.assign({}, defaultOptions, options)
+            this._isPaused = true
 
             this._iframe = this._el.firstElementChild
             this._iframe.onload = (event) => {
@@ -23,7 +32,6 @@
                         extra: this._id
                     })
                     this._loaded = true
-                    this.setVolume(this._volume)
                 } else {
                     this._loaded = false
                 }
@@ -35,9 +43,21 @@
                     if (data.identifier === this._id) {
                         switch (data.status) {
                             case 'blitzr_playing':
-                            this.currentTime = data.time
-                            this.duration = data.duration
-                            break
+                                if (this._isPaused) {
+                                    this._isPaused = false
+                                    this._options.onPlay()
+                                    this._setVolume(this.volume)
+                                }
+                                this.currentTime = data.time
+                                this.duration = data.duration
+                                break
+                            case 'blitzr_paused':
+                                this._options.onPause()
+                                this._isPaused = true
+                                break
+                            case 'blitzr_ended':
+                                this._options.onEnd()
+                                break
                         }
                     }
                 } catch(err) {
@@ -54,6 +74,7 @@
         load(track) {
             this._src = `http://player.blitzr.com/${track}?t=${this._id}`
             this._iframe.setAttribute('src', this._src)
+            this._options.onLoad(this)
         }
 
         play() {
@@ -69,6 +90,11 @@
         }
 
         setVolume(volume) {
+            this._setVolume(volume)
+            this._options.onSetVolume(volume, this)
+        }
+
+        _setVolume(volume) {
             if (volume < 0) {
                 volume = 0
             } else if (volume > 100) {
@@ -78,11 +104,12 @@
                 command: 'blitzr_volume',
                 extra: volume
             })
-            this._volume = volume
+            this.volume = volume
         }
 
         stop() {
             this._iframe.setAttribute('src', '')
+            this._options.onStop(this)
         }
 
         seekTo(time) {
@@ -90,6 +117,7 @@
                 command: 'blitzr_seek',
                 extra: time
             })
+            this._options.onSeekTo(time, this)
         }
     }
 
