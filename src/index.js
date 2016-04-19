@@ -1,7 +1,10 @@
 (function() {
+    const defaultOptions = {
+        initVolume: 100
+    }
 
     class BlitzrPlayer {
-        constructor(target, options = {}) {
+        constructor(target, options = defaultOptions) {
             this._el = document.getElementById(target)
             if (!this._el) {
                 throw new Error('target not found')
@@ -10,6 +13,7 @@
             this._id = new Date().getTime()
             this._src = ''
             this._el.innerHTML = `<iframe src="${this._src}" scrolling="no" frameborder="no"></iframe>`
+            this._volume = options.initVolume
 
             this._iframe = this._el.firstElementChild
             this._iframe.onload = (event) => {
@@ -19,6 +23,7 @@
                         extra: this._id
                     })
                     this._loaded = true
+                    this.setVolume(this._volume)
                 } else {
                     this._loaded = false
                 }
@@ -31,6 +36,7 @@
                         switch (data.status) {
                             case 'blitzr_playing':
                             this.currentTime = data.time
+                            this.duration = data.duration
                             break
                         }
                     }
@@ -42,13 +48,11 @@
         }
 
         _postToIframe(message) {
-            this._iframe.contentWindow.postMessage(JSON.stringify(message), this._src)
+            this._iframe.contentWindow.postMessage(JSON.stringify(message), '*')
         }
 
         load(track) {
-            this._src = `http://play.blitzrr.net/${track}?t=${this._id}`
-            // this._src = `http://player.blitzr.com/${track}?t=${this._id}`
-            // this._src = `http://192.168.1.20:9000/${track}?t=${this._id}`
+            this._src = `http://player.blitzr.com/${track}?t=${this._id}`
             this._iframe.setAttribute('src', this._src)
         }
 
@@ -62,6 +66,19 @@
             this._postToIframe({
                 command : 'blitzr_pause'
             })
+        }
+
+        setVolume(volume) {
+            if (volume < 0) {
+                volume = 0
+            } else if (volume > 100) {
+                volume = 100
+            }
+            this._postToIframe({
+                command: 'blitzr_volume',
+                extra: volume
+            })
+            this._volume = volume
         }
 
         stop() {
