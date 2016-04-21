@@ -43,7 +43,7 @@
                 }
             }
 
-            // Lisent events
+            // Lisen events
             window.addEventListener('message', (e) => {
                 try {
                     const data = JSON.parse(e.data)
