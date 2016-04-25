@@ -8,9 +8,8 @@
   },
   "scripts": {
     "open": "google-chrome-stable ./example/index.html",
-    "build": "browserify src/index.js -t babelify -s Blitzr --outfile blitzr.js && uglifyjs blitzr.js -o blitzr.min.js",
-    "watch": "babel src/index.js --watch --presets es2015 --out-file blitzr.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run test && browserify src/index.js -t babelify -s Blitzr --outfile blitzr.js && uglifyjs blitzr.js -o blitzr.min.js",
+    "test": "mocha ./test"
   },
   "browser": "./blitzr.min.js",
   "babel": {
