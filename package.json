@@ -12,7 +12,7 @@
     "watch": "babel src/index.js --watch --presets es2015 --out-file blitzr.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "browser": "./dist/blitzr.js",
+  "browser": "./blitzr.min.js",
   "babel": {
       "presets": ["es2015"]
   },
