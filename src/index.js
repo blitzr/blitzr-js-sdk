@@ -1,4 +1,10 @@
 (function() {
+    class Blitzr {
+        constructor() {
+            this.Player = Player
+        }
+    }
+
     const defaultOptions = {
         width: 200,
         heigth: 200,
@@ -12,7 +18,7 @@
         onEnd() {}
     }
 
-    class BlitzrPlayer {
+    class Player {
         constructor(target, options = {}) {
             // Select DOM element
             this._el = document.getElementById(target)
@@ -33,7 +39,7 @@
             // Subscrib to iframe
             this._iframe.onload = (event) => {
                 if (this._iframe.getAttribute('src')) {
-                    this._postToIframe({
+                    Player._postToIframe({
                         command: 'blitzr_connect',
                         extra: this._id
                     })
@@ -97,19 +103,19 @@
         }
 
         pause() {
-            this._postToIframe({
+            Player._postToIframe({
                 command : 'blitzr_pause'
             })
         }
 
         play() {
-            this._postToIframe({
+            Player._postToIframe({
                 command : 'blitzr_play'
             })
         }
 
         seekTo(time) {
-            this._postToIframe({
+            Player._postToIframe({
                 command: 'blitzr_seek',
                 extra: time
             })
@@ -131,11 +137,5 @@
         }
     }
 
-    class Blitzr {
-        constructor() {
-        }
-    }
-
-    window.BlitzrPlayer = BlitzrPlayer
     window.Blitzr = new Blitzr()
 }())
