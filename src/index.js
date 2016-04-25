@@ -137,5 +137,9 @@
         }
     }
 
-    window.Blitzr = new Blitzr()
+
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined')
+        module.exports = Blitzr
+    else
+        window.Blitzr = new Blitzr()
 }())
