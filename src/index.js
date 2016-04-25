@@ -1,9 +1,9 @@
-const Player = require('./player.js')
+const Player = require('./player.js');
 
 class Blitzr {
     constructor() {
-        this.Player = Player
+        this.Player = Player;
     }
 }
 
-module.exports = new Blitzr()
+module.exports = new Blitzr();
