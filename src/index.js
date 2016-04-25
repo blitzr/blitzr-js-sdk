@@ -2,6 +2,7 @@
     class Blitzr {
         constructor() {
             this.Player = Player
+            this.test = 'test'
         }
     }
 
@@ -137,9 +138,8 @@
         }
     }
 
-
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined')
-        module.exports = Blitzr
+        module.exports = new Blitzr()
     else
         window.Blitzr = new Blitzr()
 }())
