@@ -39,7 +39,7 @@
             // Subscrib to iframe
             this._iframe.onload = (event) => {
                 if (this._iframe.getAttribute('src')) {
-                    Player._postToIframe({
+                    this._postToIframe({
                         command: 'blitzr_connect',
                         extra: this._id
                     })
@@ -103,19 +103,19 @@
         }
 
         pause() {
-            Player._postToIframe({
+            this._postToIframe({
                 command : 'blitzr_pause'
             })
         }
 
         play() {
-            Player._postToIframe({
+            this._postToIframe({
                 command : 'blitzr_play'
             })
         }
 
         seekTo(time) {
-            Player._postToIframe({
+            this._postToIframe({
                 command: 'blitzr_seek',
                 extra: time
             })
