@@ -4,10 +4,9 @@ class Blitzr {
     constructor(keyAPI) {
         this.Player = Player;
         this._key = keyAPI;
-        this._baseURL = 'https://api.blitzr.com';
 
         this.search = {
-            artist(query = "", filters = {}, autocomplete = false, limit = 10, start = 0, extras = false) {
+            artist(query = '', filters = {}, autocomplete = false, limit = 10, start = 0, extras = false) {
                 const data = {
                     query,
                     filters,
@@ -21,18 +20,19 @@ class Blitzr {
         };
     }
 
-    _sendToAPI(action, data) {
-        
-        const url = this._baseURL+action+query
+    _sendToAPI(path, data) {
+        const location = 'https://api.blitzr.com';
+        const query = this._toStringQuery(data);
+        const url = location+path+query;
         const req = new XMLHttpRequest();
         req.open('GET', url, true);
         req.setRequestHeader('Content-Type', 'application/json');
-        req.onreadystatechange = function (e) {
+        req.onreadystatechange = function () {
             if (req.readyState == 4) {
                 if(req.status == 200)
                     console.log(req.responseText);
                 else
-                    console.log("Error on call API");
+                    console.log('Error on call API');
             }
         };
         req.send(null);
@@ -40,24 +40,19 @@ class Blitzr {
 
     _toStringQuery(obj) {
         let str = '?';
-        const variables = [];
         for (let key in obj) {
+            str += `${key}=`;
             switch(typeof obj[key]) {
-                case 'string':
-                    variables.push(`${key}=${obj[key].trim().replace(/ /g, '+')}`);
-                    break;
-                case 'boolean':
-                    const bool = obj[key] ? 'true' : 'false';
-                    variables.push(`${key}=${bool}`);
-                    break;
-                case 'number':
-                    variables.push(`${key}=${obj[key]}`);
-                    break;
+            case 'string':
+                str += obj[key].trim().replace(/ /g, '+');
+                break;
+            case 'boolean':
+            case 'number':
+                str += obj[key].toString();
+                break;
             }
+            str += '&';
         }
-        variables.forEach(variable => {
-            str = str + variable + '&';
-        })
         return str.slice(0, -1);
     }
 }
