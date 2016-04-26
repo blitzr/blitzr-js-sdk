@@ -14,20 +14,20 @@ class Blitzr {
                 extras: false
             },
             all(query = '', type = '', autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, type, autocomplete, limit, start, extras }
-                return self._sendToAPI('/search/', data)
+                const data = { query, type, autocomplete, limit, start, extras };
+                return self._sendToAPI('/search/', data);
             },
             artist(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, filters, autocomplete, limit, start, extras }
+                const data = { query, filters, autocomplete, limit, start, extras };
                 return self._sendToAPI('/search/artist/', data);
             },
             city(query = '', autocomplete = this.default.autocomplete, latitude = false, longitude = false, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, autocomplete, limit, start, extras }
+                const data = { query, autocomplete, limit, start, extras };
                 if (latitude) {
-                    data.latitude = latitude
+                    data.latitude = latitude;
                 }
                 if (longitude) {
-                    data.longitude = longitude
+                    data.longitude = longitude;
                 }
                 return self._sendToAPI('/search/city/', data);
             }
