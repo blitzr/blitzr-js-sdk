@@ -22,7 +22,7 @@ class Player {
         // Init parameters
         this._id = new Date().getTime();
         this._src = '';
-        this._options = Object.assign({}, defaultOptions, options)
+        this._options = Object.assign({}, defaultOptions, options);
         this._el.innerHTML = `<iframe src="${this._src}" width="${this._options.width}" height="${this._options.height}" scrolling="no" frameborder="no"></iframe>`;
         this._volume = options.initVolume;
         this._loaded = false;
@@ -30,7 +30,7 @@ class Player {
         this._iframe = this._el.firstElementChild;
 
         // Subscrib to iframe
-        this._iframe.onload = (event) => {
+        this._iframe.onload = () => {
             if (this._iframe.getAttribute('src')) {
                 this._postToIframe({
                     command: 'blitzr_connect',
@@ -40,30 +40,30 @@ class Player {
             } else {
                 this._loaded = false;
             }
-        }
+        };
 
         // Lisen events
         window.addEventListener('message', (e) => {
             try {
-                const data = JSON.parse(e.data)
+                const data = JSON.parse(e.data);
                 if (data.identifier === this._id) {
                     switch (data.status) {
-                        case 'blitzr_playing':
-                            if (this._isPaused) {
-                                this._isPaused = false;
-                                this._options.onPlay();
-                                this._setVolume(this._volume);
-                            }
-                            this.currentTime = data.time;
-                            this.duration = data.duration;
-                            break
-                        case 'blitzr_paused':
-                            this._options.onPause();
-                            this._isPaused = true;
-                            break
-                        case 'blitzr_ended':
-                            this._options.onEnd();
-                            break
+                    case 'blitzr_playing':
+                        if (this._isPaused) {
+                            this._isPaused = false;
+                            this._options.onPlay();
+                            this._setVolume(this._volume);
+                        }
+                        this.currentTime = data.time;
+                        this.duration = data.duration;
+                        break;
+                    case 'blitzr_paused':
+                        this._options.onPause();
+                        this._isPaused = true;
+                        break;
+                    case 'blitzr_ended':
+                        this._options.onEnd();
+                        break;
                     }
                 }
             } catch(err) {
