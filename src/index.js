@@ -7,17 +7,34 @@ class Blitzr {
         this._key = keyAPI;
 
         this.search = {
-            artist(query = '', filters = {}, autocomplete = false, limit = 10, start = 0, extras = false) {
-                const data = {
-                    query,
-                    filters,
-                    autocomplete,
-                    limit,
-                    start,
-                    extras
-                };
+            default: {
+                limit: 10,
+                start: 0,
+                autocomplete: false,
+                extras: false
+            },
+            all(query = '', type = '', autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
+                const data = { query, type, autocomplete, limit, start, extras }
+                return self._sendToAPI('/search/', data)
+            },
+            artist(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
+                const data = { query, filters, autocomplete, limit, start, extras }
                 return self._sendToAPI('/search/artist/', data);
+            },
+            city(query = '', autocomplete = this.default.autocomplete, latitude = false, longitude = false, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
+                const data = { query, autocomplete, limit, start, extras }
+                if (latitude) {
+                    data.latitude = latitude
+                }
+                if (longitude) {
+                    data.longitude = longitude
+                }
+                return self._sendToAPI('/search/city/', data);
             }
+            // country(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
+            //     const data = { query, filters, autocomplete, limit, start, extras }
+            //     return self._sendToAPI('/search/city/', data);
+            // }
         };
     }
 
@@ -49,8 +66,8 @@ class Blitzr {
             req.open('GET', url, true);
             req.setRequestHeader('Content-Type', 'application/json');
             req.onreadystatechange = function () {
-                if (req.readyState == 4) {
-                    if (req.status == 200) {
+                if (req.readyState === 4) {
+                    if (req.status === 200) {
                         resolve(JSON.parse(req.responseText));
                     } else {
                         reject('Error on call API');
@@ -93,6 +110,10 @@ class Blitzr {
             }
         });
         return queryString.join('&');
+    }
+
+    search() {
+
     }
 }
 

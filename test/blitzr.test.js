@@ -24,14 +24,52 @@ describe('Blitzr', function () {
             assert.equal(str, 'string=lorem%20ipsum&zero=0&bool=true&boolean=false&int=10&obj[location]=bordeaux&obj[tag]=jazz&obj[num]=1337&obj[bool]=false');
         });
     });
-    describe('#search.artist', function() {
-        it('should return data in an array', function() {
-            const data = {
-                query: 'the black keys'
-            }
-            const artist = blitzr.search.artist(data).then(res => {
-                assert.equal(typeof res, 'array')
-            })
-        });
-    });
+    // describe('#search', function() {
+    //     describe('.all', function () {
+    //         it('should return data in an array', function(done) {
+    //             const data = {
+    //                 query: 'the black keys'
+    //             }
+    //             blitzr.search.all(data).then(res => {
+    //                 assert.equal(typeof res, 'array');
+    //                 done();
+    //             }).catch((res) => { done(res) });
+    //         });
+    //     });
+    //
+    //     describe('.artist', function() {
+    //         it('should return data in an array', function(done) {
+    //             const data = {
+    //                 query: 'the black keys'
+    //             };
+    //             blitzr.search.artist(data).then(res => {
+    //                 assert.equal(typeof res, 'array');
+    //                 done();
+    //             }).catch((res) => { done(res) });
+    //         });
+    //     });
+    //
+    //     describe('.city', function() {
+    //         it('should return data in an array', function(done) {
+    //             const data = {
+    //                 query: 'lyon'
+    //             };
+    //             blitzr.search.city(data).then(res => {
+    //                 assert.equal(typeof res, 'array');
+    //                 done();
+    //             }).catch((res) => { done(res) });
+    //         });
+    //
+    //         it('search by latitude/longitude', function(done) {
+    //             const data = {
+    //                 latitude: 44.8404400,
+    //                 longitude: -0.5805000,
+    //             };
+    //             blitzr.search.city(data).then(res => {
+    //                 assert.equal(typeof res, 'array');
+    //                 done();
+    //             }).catch((res) => { done(res) });
+    //         });
+    //     });
+    // });
 });
