@@ -2,6 +2,7 @@ const Player = require('./player.js');
 
 class Blitzr {
     constructor(keyAPI) {
+        const self = this;
         this.Player = Player;
         this._key = keyAPI;
 
@@ -15,46 +16,84 @@ class Blitzr {
                     start,
                     extras
                 };
-                this._sendToAPI('/search/artist', data);
+                return self._sendToAPI('/search/artist/', data);
             }
         };
+    }
+
+    _isEmpty(object) {
+        switch (typeof object) {
+        case 'string':
+        case 'array':
+            return !object.length;
+        case 'object':
+            for(var key in object) {
+                if(object.hasOwnProperty(key)){
+                    return false;
+                }
+            }
+            return true;
+        default:
+            return false;
+        }
     }
 
     _sendToAPI(path, data) {
         const location = 'https://api.blitzr.com';
-        const query = this._toStringQuery(data);
-        const url = location+path+query;
-        const req = new XMLHttpRequest();
-        req.open('GET', url, true);
-        req.setRequestHeader('Content-Type', 'application/json');
-        req.onreadystatechange = function () {
-            if (req.readyState == 4) {
-                if(req.status == 200)
-                    console.log(req.responseText);
-                else
-                    console.log('Error on call API');
-            }
-        };
-        req.send(null);
+        const query = this._toQueryString(data);
+        const key = '?key=' + this._key + '&';
+        const url = location + path + key + query;
+
+        return new Promise((resolve, reject) => {
+            const req = new XMLHttpRequest();
+            req.open('GET', url, true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            req.onreadystatechange = function () {
+                if (req.readyState == 4) {
+                    if (req.status == 200) {
+                        resolve(JSON.parse(req.responseText));
+                    } else {
+                        reject('Error on call API');
+                    }
+                }
+            };
+            req.send(null);
+        });
     }
 
-    _toStringQuery(obj) {
-        let str = '?';
-        for (let key in obj) {
-            str += `${key}=`;
-            switch(typeof obj[key]) {
-            case 'string':
-                str += obj[key].trim().replace(/ /g, '+');
-                break;
-            case 'boolean':
-            case 'number':
-                str += obj[key].toString();
-                break;
+    _toQueryString(object, base) {
+        const queryString = [];
+
+        Object.keys(object).forEach((key) => {
+            let result;
+            let value;
+
+            value =  object[key];
+
+            if (base) {
+                key = `${base}[${key}]`;
             }
-            str += '&';
-        }
-        return str.slice(0, -1);
+            switch (typeof value) {
+            case 'object':
+                result = this._toQueryString(value, key);
+                break;
+            case 'array':
+                var qs = {};
+                value.forEach((val, i) => {
+                    qs[i] = val;
+                });
+                result = this._toQueryString(qs, key);
+                break;
+            default:
+                result = `${key}=${encodeURIComponent(value)}`;
+            }
+
+            if (!this._isEmpty(value)) {
+                queryString.push(result);
+            }
+        });
+        return queryString.join('&');
     }
 }
 
-module.exports = new Blitzr();
+module.exports = Blitzr;
