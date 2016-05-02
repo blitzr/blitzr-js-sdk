@@ -37,8 +37,10 @@ describe('Blitzr', function () {
         ;
 
     describe('#constructor', function() {
-        it('should throw an error', function() {
-            assert.throws(() => new Blitzr());
+        context('no API Key specified', function () {
+            it('should throw an error', function() {
+                assert.throws(() => new Blitzr());
+            });
         });
         it('should create an instance', function() {
             assert.doesNotThrow(() => new Blitzr('f1a14162e95f6f0afd4d70e1ad526ad3'));
