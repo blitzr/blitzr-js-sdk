@@ -51,6 +51,36 @@ class Blitzr {
                 return self._sendToAPI('/search/track/', data);
             }
         };
+
+        this.radio = {
+            default: {
+                limit: 10
+            },
+            artist(slug = '', uuid = '', limit = this.default.limit) {
+                const data = { slug, uuid, limit };
+                return self._sendToAPI('/radio/artist/', data);
+            },
+            artistSimilar(slug = '', uuid = '', limit = this.default.limit) {
+                const data = { slug, uuid, limit };
+                return self._sendToAPI('/radio/artist/similar/', data);
+            },
+            event(slug = '', uuid = '', limit = this.default.limit) {
+                const data = { slug, uuid, limit };
+                return self._sendToAPI('/radio/event/', data);
+            },
+            label(slug = '', uuid = '', limit = this.default.limit) {
+                const data = { slug, uuid, limit };
+                return self._sendToAPI('/radio/label/', data);
+            },
+            tag(slug = '', limit = this.default.limit) {
+                const data = { slug, limit };
+                return self._sendToAPI('/radio/tag/', data);
+            },
+            venue(venue = '', city = '', limit = this.default.limit) {
+                const data = { venue, city, limit };
+                return self._sendToAPI('/radio/venue/', data);
+            }
+        };
     }
 
     _isEmpty(object) {
@@ -125,10 +155,6 @@ class Blitzr {
             }
         });
         return queryString.join('&');
-    }
-
-    search() {
-
     }
 }
 

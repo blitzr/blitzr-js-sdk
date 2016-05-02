@@ -206,4 +206,76 @@ describe('Blitzr', function () {
             });
         });
     });
+
+    describe('#radio', function () {
+        before(function () {
+            sinon.stub(blitzr, '_sendToAPI').returns(Promise.resolve([{ foo: 'bar' }]));
+        });
+
+        after(function () {
+            blitzr._sendToAPI.restore();
+        });
+
+        const tests = [
+            {method: 'artist', url: '/radio/artist/', queries: [{
+                params: ['the-black-keys'],
+                data: {
+                    slug: 'the-black-keys',
+                    uuid: '',
+                    limit: 10
+                }
+            }]},
+            {method: 'artistSimilar', url: '/radio/artist/similar/', queries: [{
+                params: ['the-black-keys'],
+                data: {
+                    slug: 'the-black-keys',
+                    uuid: '',
+                    limit: 10
+                }
+            }]},
+            {method: 'event', url: '/radio/event/', queries: [{
+                params: ['event'],
+                data: {
+                    slug: 'event',
+                    uuid: '',
+                    limit: 10
+                }
+            }]},
+            {method: 'label', url: '/radio/label/', queries: [{
+                params: ['good records'],
+                data: {
+                    slug: 'good records',
+                    uuid: '',
+                    limit: 10
+                }
+            }]},
+            {method: 'tag', url: '/radio/tag/', queries: [{
+                params: ['tag'],
+                data: {
+                    slug: 'tag',
+                    limit: 10
+                }
+            }]},
+            {method: 'venue', url: '/radio/venue/', queries: [{
+                params: ['AccorHotels Arena', 'paris'],
+                data: {
+                    venue: 'AccorHotels Arena',
+                    city: 'paris',
+                    limit: 10
+                }
+            }]}
+        ];
+
+        tests.forEach(test => {
+            describe(`.${test.method}`, function() {
+                test.queries.forEach(query => {
+                    it(`should send request ${test.url} with right params`, function() {
+                        return blitzr.radio[test.method].apply(blitzr.search, query.params).then(() => {
+                            assert(blitzr._sendToAPI.calledWith(test.url, query.data), '_sendToAPI is called with wrongs params');
+                        });
+                    });
+                });
+            });
+        });
+    });
 });
