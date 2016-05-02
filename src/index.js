@@ -33,11 +33,11 @@ class Blitzr {
                     data.longitude = longitude;
                 }
                 return self._sendToAPI('/search/city/', data);
+            },
+            country(country_code = '', limit = this.default.limit, start = this.default.start) {
+                const data = { country_code, limit, start };
+                return self._sendToAPI('/search/country/', data);
             }
-            // country(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-            //     const data = { query, filters, autocomplete, limit, start, extras }
-            //     return self._sendToAPI('/search/city/', data);
-            // }
         };
     }
 

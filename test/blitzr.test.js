@@ -1,10 +1,10 @@
 const assert = require('assert');
 const sinon = require('sinon');
 const Blitzr = require ('../blitzr.js');
+const blitzr = new Blitzr('f1a14162e95f6f0afd4d70e1ad526ad3');
 
 describe('Blitzr', function () {
-    var blitzr,
-        baseURL = 'https://api.blitzr.com/search/?key=f1a14162e95f6f0afd4d70e1ad526ad3',
+    var baseURL = 'https://api.blitzr.com/search/?key=f1a14162e95f6f0afd4d70e1ad526ad3',
         data = {
             string: 'lorem ipsum',
             stringEmpty: '',
@@ -30,9 +30,7 @@ describe('Blitzr', function () {
             assert.throws(() => new Blitzr());
         });
         it('should create an instance', function() {
-            assert.doesNotThrow(() => {
-                blitzr = new Blitzr('f1a14162e95f6f0afd4d70e1ad526ad3');
-            });
+            assert.doesNotThrow(() => new Blitzr('f1a14162e95f6f0afd4d70e1ad526ad3'));
         });
     });
 
@@ -132,6 +130,20 @@ describe('Blitzr', function () {
                     limit: 10,
                     start: 0,
                     extras: false
+                }
+            }]},
+            {method: 'country', url: '/search/country/', queries: [{
+                params: [55],
+                data: {
+                    country_code: 55,
+                    limit: 10,
+                    start: 0
+                }
+            },{
+                params: [],
+                data: {
+                    limit: 10,
+                    start: 0
                 }
             }]}
         ];
