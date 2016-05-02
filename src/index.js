@@ -10,86 +10,56 @@ class Blitzr {
         this._key = keyAPI;
 
         this.search = {
-            default: {
-                limit: 10,
-                start: 0,
-                autocomplete: false,
-                extras: false
-            },
-            all(query = '', type = 'artist, label, release, track', autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, type, autocomplete, limit, start, extras };
+            all(data) {
                 return self._sendToAPI('/search/', data);
             },
-            artist(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, filters, autocomplete, limit, start, extras };
+            artist(data) {
                 return self._sendToAPI('/search/artist/', data);
             },
-            city(query = '', autocomplete = this.default.autocomplete, latitude = false, longitude = false, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, autocomplete, limit, start, extras };
-                if (latitude) {
-                    data.latitude = latitude;
-                }
-                if (longitude) {
-                    data.longitude = longitude;
-                }
+            city(data) {
                 return self._sendToAPI('/search/city/', data);
             },
-            country(country_code = '', limit = this.default.limit, start = this.default.start) {
-                const data = { country_code, limit, start };
+            country(data) {
                 return self._sendToAPI('/search/country/', data);
             },
-            label(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, filters, autocomplete, limit, start, extras};
+            label(data) {
                 return self._sendToAPI('/search/label/', data);
             },
-            release(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, filters, autocomplete, limit, start, extras};
+            release(data) {
                 return self._sendToAPI('/search/release/', data);
             },
-            track(query = '', filters = {}, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, filters, limit, start, extras};
+            track(data) {
                 return self._sendToAPI('/search/track/', data);
             }
         };
 
         this.radio = {
-            default: {
-                limit: 10
-            },
-            artist(slug = '', uuid = '', limit = this.default.limit) {
-                const data = { slug, uuid, limit };
+            artist(data) {
                 return self._sendToAPI('/radio/artist/', data);
             },
-            artistSimilar(slug = '', uuid = '', limit = this.default.limit) {
-                const data = { slug, uuid, limit };
+            artistSimilar(data) {
                 return self._sendToAPI('/radio/artist/similar/', data);
             },
-            event(slug = '', uuid = '', limit = this.default.limit) {
-                const data = { slug, uuid, limit };
+            event(data) {
                 return self._sendToAPI('/radio/event/', data);
             },
-            label(slug = '', uuid = '', limit = this.default.limit) {
-                const data = { slug, uuid, limit };
+            label(data) {
                 return self._sendToAPI('/radio/label/', data);
             },
-            tag(slug = '', limit = this.default.limit) {
-                const data = { slug, limit };
+            tag(data) {
                 return self._sendToAPI('/radio/tag/', data);
             },
-            venue(venue = '', city = '', limit = this.default.limit) {
-                const data = { venue, city, limit };
+            venue(data) {
                 return self._sendToAPI('/radio/venue/', data);
             }
         };
 
         this.track = {
-            get(uuid = '') {
-                const data = { uuid };
-                return self._sendToAPI('/track/', data);
+            get(uuid) {
+                return self._sendToAPI('/track/', { uuid });
             },
-            sources(uuid = '') {
-                const data = { uuid };
-                return self._sendToAPI('/track/sources/', data);
+            sources(uuid) {
+                return self._sendToAPI('/track/sources/', { uuid });
             }
         };
     }

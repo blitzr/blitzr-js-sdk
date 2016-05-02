@@ -36,6 +36,20 @@ describe('Blitzr', function () {
             +'&obj[float]=3.1416'
         ;
 
+    function requestsTester(tests, property) {
+        tests.forEach(test => {
+            describe(`.${test.method}`, function() {
+                test.queries.forEach(query => {
+                    it(`should send request ${test.url} with right params`, function() {
+                        return blitzr[property][test.method](query).then(() => {
+                            assert(blitzr._sendToAPI.calledWith(test.url, query), '_sendToAPI is called with wrongs params');
+                        });
+                    });
+                });
+            });
+        });
+    }
+
     describe('#constructor', function() {
         context('no API Key specified', function () {
             it('should throw an error', function() {
@@ -68,7 +82,7 @@ describe('Blitzr', function () {
         });
     });
 
-    describe('#_sendToAPI', function() {
+    describe('#_sendToAPI', function () {
         let request;
         before(function () {
             global.XMLHttpRequest = sinon.useFakeXMLHttpRequest();
@@ -92,7 +106,7 @@ describe('Blitzr', function () {
         });
     });
 
-    describe('#search', function() {
+    describe('#search', function () {
         before(function () {
             sinon.stub(blitzr, '_sendToAPI').returns(Promise.resolve([{ foo: 'bar' }]));
         });
@@ -102,109 +116,50 @@ describe('Blitzr', function () {
         });
 
         const tests = [
-            {method: 'all', url: '/search/', queries: [{
-                params: ['the black keys'],
-                data: {
+            {method: 'all', url: '/search/', queries: [
+                {
                     query: 'the black keys',
-                    type: 'artist, label, release, track',
-                    autocomplete: false,
-                    limit: 10,
-                    start: 0,
-                    extras: false
+                    type: 'artist, label, release, track'
                 }
-            }]},
-            {method: 'artist', url: '/search/artist/', queries: [{
-                params: ['the black keys'],
-                data: {
-                    query: 'the black keys',
-                    filters: {},
-                    autocomplete: false,
-                    limit: 10,
-                    start: 0,
-                    extras: false
+            ]},
+            {method: 'artist', url: '/search/artist/', queries: [
+                {
+                    query: 'the black keys'
                 }
-            }]},
-            {method: 'city', url: '/search/city/', queries: [{
-                params: ['paris'],
-                data: {
-                    query: 'paris',
-                    autocomplete: false,
-                    limit: 10,
-                    start: 0,
-                    extras: false
-                }
-            },{
-                params: ['Los', true, 42.1337, -3.1416],
-                data: {
+            ]},
+            {method: 'city', url: '/search/city/', queries: [
+                {
+                    query: 'paris'
+                },{
                     query: 'Los',
                     autocomplete: true,
                     latitude: 42.1337,
-                    longitude: -3.1416,
-                    limit: 10,
-                    start: 0,
-                    extras: false
+                    longitude: -3.1416
                 }
-            }]},
-            {method: 'country', url: '/search/country/', queries: [{
-                params: [55],
-                data: {
-                    country_code: 55,
-                    limit: 10,
-                    start: 0
+            ]},
+            {method: 'country', url: '/search/country/', queries: [
+                {
+                    country_code: 55
                 }
-            },{
-                params: [],
-                data: {
-                    country_code: '',
-                    limit: 10,
-                    start: 0
+            ]},
+            {method: 'label', url: '/search/label/', queries: [
+                {
+                    query: 'good records'
                 }
-            }]},
-            {method: 'label', url: '/search/label/', queries: [{
-                params: ['good records'],
-                data: {
-                    query: 'good records',
-                    filters: {},
-                    autocomplete: false,
-                    limit: 10,
-                    start: 0,
-                    extras: false
+            ]},
+            {method: 'release', url: '/search/release/', queries: [
+                {
+                    query: '1998'
                 }
-            }]},
-            {method: 'release', url: '/search/release/', queries: [{
-                params: ['1998'],
-                data: {
-                    query: '1998',
-                    filters: {},
-                    autocomplete: false,
-                    limit: 10,
-                    start: 0,
-                    extras: false
+            ]},
+            {method: 'track', url: '/search/track/', queries: [
+                {
+                    query: 'appel'
                 }
-            }]},
-            {method: 'track', url: '/search/track/', queries: [{
-                params: ['appel'],
-                data: {
-                    query: 'appel',
-                    filters: {},
-                    limit: 10,
-                    start: 0,
-                    extras: false
-                }
-            }]}
+            ]}
         ];
 
-        tests.forEach(test => {
-            describe(`.${test.method}`, function() {
-                test.queries.forEach(query => {
-                    it(`should send request ${test.url} with right params`, function() {
-                        return blitzr.search[test.method].apply(blitzr.search, query.params).then(() => {
-                            assert(blitzr._sendToAPI.calledWith(test.url, query.data), '_sendToAPI is called with wrongs params');
-                        });
-                    });
-                });
-            });
-        });
+        requestsTester(tests, 'search');
     });
 
     describe('#radio', function () {
@@ -217,66 +172,39 @@ describe('Blitzr', function () {
         });
 
         const tests = [
-            {method: 'artist', url: '/radio/artist/', queries: [{
-                params: ['the-black-keys'],
-                data: {
-                    slug: 'the-black-keys',
-                    uuid: '',
-                    limit: 10
+            {method: 'artist', url: '/radio/artist/', queries: [
+                {
+                    slug: 'the-black-keys'
                 }
-            }]},
-            {method: 'artistSimilar', url: '/radio/artist/similar/', queries: [{
-                params: ['the-black-keys'],
-                data: {
-                    slug: 'the-black-keys',
-                    uuid: '',
-                    limit: 10
+            ]},
+            {method: 'artistSimilar', url: '/radio/artist/similar/', queries: [
+                {
+                    slug: 'the-black-keys'
                 }
-            }]},
-            {method: 'event', url: '/radio/event/', queries: [{
-                params: ['event'],
-                data: {
-                    slug: 'event',
-                    uuid: '',
-                    limit: 10
+            ]},
+            {method: 'event', url: '/radio/event/', queries: [
+                {
+                    slug: 'event'
                 }
-            }]},
-            {method: 'label', url: '/radio/label/', queries: [{
-                params: ['good records'],
-                data: {
-                    slug: 'good records',
-                    uuid: '',
-                    limit: 10
+            ]},
+            {method: 'label', url: '/radio/label/', queries: [
+                {
+                    slug: 'good records'
                 }
-            }]},
-            {method: 'tag', url: '/radio/tag/', queries: [{
-                params: ['tag'],
-                data: {
-                    slug: 'tag',
-                    limit: 10
+            ]},
+            {method: 'tag', url: '/radio/tag/', queries: [
+                {
+                    slug: 'tag'
                 }
-            }]},
-            {method: 'venue', url: '/radio/venue/', queries: [{
-                params: ['AccorHotels Arena', 'paris'],
-                data: {
-                    venue: 'AccorHotels Arena',
-                    city: 'paris',
-                    limit: 10
+            ]},
+            {method: 'venue', url: '/radio/venue/', queries: [
+                {
+                    venue: 'AccorHotels Arena'
                 }
-            }]}
+            ]}
         ];
 
-        tests.forEach(test => {
-            describe(`.${test.method}`, function() {
-                test.queries.forEach(query => {
-                    it(`should send request ${test.url} with right params`, function() {
-                        return blitzr.radio[test.method].apply(blitzr.search, query.params).then(() => {
-                            assert(blitzr._sendToAPI.calledWith(test.url, query.data), '_sendToAPI is called with wrongs params');
-                        });
-                    });
-                });
-            });
-        });
+        requestsTester(tests, 'radio');
     });
 
     describe('#track', function() {
@@ -289,26 +217,20 @@ describe('Blitzr', function () {
         });
 
         const tests = [
-            {method: 'get', url: '/track/', queries: [{
-                params: ['TR9Hfgh6dDL7EUDk7x'],
-                data: {
-                    uuid: 'TR9Hfgh6dDL7EUDk7x'
-                }
-            }]},
-            {method: 'sources', url: '/track/sources/', queries: [{
-                params: ['TR9Hfgh6dDL7EUDk7x'],
-                data: {
-                    uuid: 'TR9Hfgh6dDL7EUDk7x'
-                }
-            }]}
+            {method: 'get', url: '/track/', queries: [
+                'TR9Hfgh6dDL7EUDk7x'
+            ]},
+            {method: 'sources', url: '/track/sources/', queries: [
+                'TR9Hfgh6dDL7EUDk7x'
+            ]}
         ];
 
         tests.forEach(test => {
             describe(`.${test.method}`, function() {
                 test.queries.forEach(query => {
                     it(`should send request ${test.url} with right params`, function() {
-                        return blitzr.track[test.method].apply(blitzr.search, query.params).then(() => {
-                            assert(blitzr._sendToAPI.calledWith(test.url, query.data), '_sendToAPI is called with wrongs params');
+                        return blitzr.track[test.method](query).then(() => {
+                            assert(blitzr._sendToAPI.calledWith(test.url, { uuid: query }), '_sendToAPI is called with wrongs params');
                         });
                     });
                 });
