@@ -39,8 +39,12 @@ class Blitzr {
                 return self._sendToAPI('/search/country/', data);
             },
             label(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
-                const data = { query, filters, autocomplete, limit, start, extras}
+                const data = { query, filters, autocomplete, limit, start, extras};
                 return self._sendToAPI('/search/label/', data);
+            },
+            release(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
+                const data = { query, filters, autocomplete, limit, start, extras};
+                return self._sendToAPI('/search/release/', data);
             }
         };
     }
