@@ -179,6 +179,16 @@ describe('Blitzr', function () {
                     start: 0,
                     extras: false
                 }
+            }]},
+            {method: 'track', url: '/search/track/', queries: [{
+                params: ['appel'],
+                data: {
+                    query: 'appel',
+                    filters: {},
+                    limit: 10,
+                    start: 0,
+                    extras: false
+                }
             }]}
         ];
 
