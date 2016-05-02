@@ -14,7 +14,14 @@ describe('Blitzr', function () {
             boolTrue: true,
             boolFalse: false,
             arrayEmpty: [],
-            objEmpty: {}
+            objEmpty: {},
+            obj: {
+                string: 'lorem ipsum',
+                stringEmpty: '',
+                int: 42,
+                zero: 0,
+                float: 3.1416
+            }
         },
         queryString =
             'string=lorem%20ipsum'
@@ -23,6 +30,10 @@ describe('Blitzr', function () {
             +'&float=3.1416'
             +'&boolTrue=true'
             +'&boolFalse=false'
+            +'&obj[string]=lorem%20ipsum'
+            +'&obj[int]=42'
+            +'&obj[zero]=0'
+            +'&obj[float]=3.1416'
         ;
 
     describe('#constructor', function() {
