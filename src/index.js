@@ -2,6 +2,9 @@ const Player = require('./player.js');
 
 class Blitzr {
     constructor(keyAPI) {
+        if(!keyAPI) {
+            throw new Error('API Key is required for use Blitzr');
+        }
         const self = this;
         this.Player = Player;
         this._key = keyAPI;
@@ -13,7 +16,7 @@ class Blitzr {
                 autocomplete: false,
                 extras: false
             },
-            all(query = '', type = '', autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
+            all(query = '', type = 'artist, label, release, track', autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
                 const data = { query, type, autocomplete, limit, start, extras };
                 return self._sendToAPI('/search/', data);
             },
