@@ -45,6 +45,10 @@ class Blitzr {
             release(query = '', filters = {}, autocomplete = this.default.autocomplete, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
                 const data = { query, filters, autocomplete, limit, start, extras};
                 return self._sendToAPI('/search/release/', data);
+            },
+            track(query = '', filters = {}, limit = this.default.limit, start = this.default.start, extras = this.default.extras) {
+                const data = { query, filters, limit, start, extras};
+                return self._sendToAPI('/search/track/', data);
             }
         };
     }
