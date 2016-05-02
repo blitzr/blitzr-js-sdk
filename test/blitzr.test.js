@@ -168,6 +168,17 @@ describe('Blitzr', function () {
                     start: 0,
                     extras: false
                 }
+            }]},
+            {method: 'release', url: '/search/release/', queries: [{
+                params: ['1998'],
+                data: {
+                    query: '1998',
+                    filters: {},
+                    autocomplete: false,
+                    limit: 10,
+                    start: 0,
+                    extras: false
+                }
             }]}
         ];
 
