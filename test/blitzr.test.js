@@ -142,8 +142,20 @@ describe('Blitzr', function () {
             },{
                 params: [],
                 data: {
+                    country_code: '',
                     limit: 10,
                     start: 0
+                }
+            }]},
+            {method: 'label', url: '/search/label/', queries: [{
+                params: ['good records'],
+                data: {
+                    query: 'good records',
+                    filters: {},
+                    autocomplete: false,
+                    limit: 10,
+                    start: 0,
+                    extras: false
                 }
             }]}
         ];
