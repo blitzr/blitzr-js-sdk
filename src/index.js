@@ -81,6 +81,17 @@ class Blitzr {
                 return self._sendToAPI('/radio/venue/', data);
             }
         };
+
+        this.track = {
+            get(uuid = '') {
+                const data = { uuid };
+                return self._sendToAPI('/track/', data);
+            },
+            sources(uuid = '') {
+                const data = { uuid };
+                return self._sendToAPI('/track/sources/', data);
+            }
+        };
     }
 
     _isEmpty(object) {

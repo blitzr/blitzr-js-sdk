@@ -278,4 +278,41 @@ describe('Blitzr', function () {
             });
         });
     });
+
+    describe('#track', function() {
+        before(function () {
+            sinon.stub(blitzr, '_sendToAPI').returns(Promise.resolve([{ foo: 'bar' }]));
+        });
+
+        after(function () {
+            blitzr._sendToAPI.restore();
+        });
+
+        const tests = [
+            {method: 'get', url: '/track/', queries: [{
+                params: ['TR9Hfgh6dDL7EUDk7x'],
+                data: {
+                    uuid: 'TR9Hfgh6dDL7EUDk7x'
+                }
+            }]},
+            {method: 'sources', url: '/track/sources/', queries: [{
+                params: ['TR9Hfgh6dDL7EUDk7x'],
+                data: {
+                    uuid: 'TR9Hfgh6dDL7EUDk7x'
+                }
+            }]}
+        ];
+
+        tests.forEach(test => {
+            describe(`.${test.method}`, function() {
+                test.queries.forEach(query => {
+                    it(`should send request ${test.url} with right params`, function() {
+                        return blitzr.track[test.method].apply(blitzr.search, query.params).then(() => {
+                            assert(blitzr._sendToAPI.calledWith(test.url, query.data), '_sendToAPI is called with wrongs params');
+                        });
+                    });
+                });
+            });
+        });
+    });
 });
