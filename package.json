@@ -9,9 +9,10 @@
   "scripts": {
     "open": "google-chrome-stable ./example/index.html",
     "build": "browserify src/index.js -t babelify -s Blitzr --outfile blitzr.js",
-    "package": "npm run build && npm run lint && npm run test && uglifyjs blitzr.js -o blitzr.min.js",
+    "package": "npm run build && eslint --quiet ./src ./test && mocha --reporter='dot' ./test && uglifyjs blitzr.js -o blitzr.min.js",
     "lint": "eslint ./src ./test",
-    "test": "npm run build && mocha ./test"
+    "test": "npm run build && mocha ./test",
+    "debug-mocha": "npm run build && iron-node node_modules/mocha/bin/_mocha"
   },
   "browser": "./blitzr.min.js",
   "babel": {
@@ -40,7 +41,7 @@
     "browserify": "^13.0.0",
     "eslint": "^2.8.0",
     "mocha": "^2.4.5",
-    "uglify-js": "^2.6.2",
-    "xmlhttprequest": "^1.8.0"
+    "sinon": "^1.17.3",
+    "uglify-js": "^2.6.2"
   }
 }
