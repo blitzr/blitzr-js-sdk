@@ -91,29 +91,58 @@ describe('Blitzr', function () {
         });
 
         const tests = [
-            {method: 'all', url: '/search/', query: 'the black keys', data: {
-                query: 'the black keys',
-                type: 'artist, label, release, track',
-                autocomplete: false,
-                limit: 10,
-                start: 0,
-                extras: false
-            }},
-            {method: 'artist', url: '/search/artist/', query: 'the black keys', data: {
-                query: 'the black keys',
-                filters: {},
-                autocomplete: false,
-                limit: 10,
-                start: 0,
-                extras: false
-            }}
+            {method: 'all', url: '/search/', queries: [{
+                params: ['the black keys'],
+                data: {
+                    query: 'the black keys',
+                    type: 'artist, label, release, track',
+                    autocomplete: false,
+                    limit: 10,
+                    start: 0,
+                    extras: false
+                }
+            }]},
+            {method: 'artist', url: '/search/artist/', queries: [{
+                params: ['the black keys'],
+                data: {
+                    query: 'the black keys',
+                    filters: {},
+                    autocomplete: false,
+                    limit: 10,
+                    start: 0,
+                    extras: false
+                }
+            }]},
+            {method: 'city', url: '/search/city/', queries: [{
+                params: ['paris'],
+                data: {
+                    query: 'paris',
+                    autocomplete: false,
+                    limit: 10,
+                    start: 0,
+                    extras: false
+                }
+            },{
+                params: ['Los', true, 42.1337, -3.1416],
+                data: {
+                    query: 'Los',
+                    autocomplete: true,
+                    latitude: 42.1337,
+                    longitude: -3.1416,
+                    limit: 10,
+                    start: 0,
+                    extras: false
+                }
+            }]}
         ];
 
         tests.forEach(test => {
             describe(`.${test.method}`, function() {
-                it(`should send request ${test.url}`, function() {
-                    return blitzr.search[test.method](test.query).then(() => {
-                        assert(blitzr._sendToAPI.calledWith(test.url, test.data), '_sendToAPI is called with wrongs params');
+                test.queries.forEach(query => {
+                    it(`should send request ${test.url} with right params`, function() {
+                        return blitzr.search[test.method].apply(blitzr.search, query.params).then(() => {
+                            assert(blitzr._sendToAPI.calledWith(test.url, query.data), '_sendToAPI is called with wrongs params');
+                        });
                     });
                 });
             });
