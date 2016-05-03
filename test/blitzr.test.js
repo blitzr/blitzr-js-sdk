@@ -218,23 +218,17 @@ describe('Blitzr', function () {
 
         const tests = [
             {method: 'get', url: '/track/', queries: [
-                'TR9Hfgh6dDL7EUDk7x'
+                {
+                    uuid: 'TR9Hfgh6dDL7EUDk7x'
+                }
             ]},
             {method: 'sources', url: '/track/sources/', queries: [
-                'TR9Hfgh6dDL7EUDk7x'
+                {
+                    uuid: 'TR9Hfgh6dDL7EUDk7x'
+                }
             ]}
         ];
 
-        tests.forEach(test => {
-            describe(`.${test.method}`, function() {
-                test.queries.forEach(query => {
-                    it(`should send request ${test.url} with right params`, function() {
-                        return blitzr.track[test.method](query).then(() => {
-                            assert(blitzr._sendToAPI.calledWith(test.url, { uuid: query }), '_sendToAPI is called with wrongs params');
-                        });
-                    });
-                });
-            });
-        });
+        requestsTester(tests, 'track');
     });
 });

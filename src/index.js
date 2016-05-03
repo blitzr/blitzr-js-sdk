@@ -55,11 +55,11 @@ class Blitzr {
         };
 
         this.track = {
-            get(uuid) {
-                return self._sendToAPI('/track/', { uuid });
+            get(data) {
+                return self._sendToAPI('/track/', data);
             },
-            sources(uuid) {
-                return self._sendToAPI('/track/sources/', { uuid });
+            sources(data) {
+                return self._sendToAPI('/track/sources/', data);
             }
         };
     }
