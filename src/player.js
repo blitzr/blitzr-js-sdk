@@ -3,6 +3,7 @@ const defaultOptions = {
     heigth: 200,
     initVolume: 100,
     onPlay() {},
+    onPlaying() {},
     onPause() {},
     onLoad() {},
     onSeekTo() {},
@@ -56,6 +57,7 @@ class Player {
                         }
                         this.currentTime = data.time;
                         this.duration = data.duration;
+                        this._options.onPlaying();
                         break;
                     case 'blitzr_paused':
                         this._options.onPause();
