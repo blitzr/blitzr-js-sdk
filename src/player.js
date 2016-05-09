@@ -24,7 +24,7 @@ class Player {
         this._src = '';
         this._options = Object.assign({}, defaultOptions, options);
         this._el.innerHTML = `<iframe src="${this._src}" width="${this._options.width}" height="${this._options.height}" scrolling="no" frameborder="no"></iframe>`;
-        this._volume = options.initVolume;
+        this._volume = this._options.initVolume;
         this._loaded = false;
         this._isPaused = true;
         this._iframe = this._el.firstElementChild;
