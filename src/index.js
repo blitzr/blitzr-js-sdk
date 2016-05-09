@@ -2,7 +2,7 @@ const Player = require('./player.js');
 
 class Blitzr {
     constructor(keyAPI) {
-        if(!keyAPI) {
+        if (!keyAPI) {
             throw new Error('API Key is required for use Blitzr');
         }
         const self = this;
@@ -70,8 +70,8 @@ class Blitzr {
         case 'array':
             return !object.length;
         case 'object':
-            for(var key in object) {
-                if(object.hasOwnProperty(key)){
+            for (var key in object) {
+                if (object.hasOwnProperty(key)) {
                     return false;
                 }
             }
@@ -91,7 +91,7 @@ class Blitzr {
             const req = new XMLHttpRequest();
             req.open('GET', url, true);
             req.setRequestHeader('Content-Type', 'application/json');
-            req.onreadystatechange = function () {
+            req.onreadystatechange = function() {
                 if (req.readyState === 4) {
                     if (req.status === 200) {
                         resolve(JSON.parse(req.responseText));
@@ -109,9 +109,7 @@ class Blitzr {
 
         Object.keys(object).forEach((key) => {
             let result;
-            let value;
-
-            value =  object[key];
+            const value = object[key];
 
             if (base) {
                 key = `${base}[${key}]`;

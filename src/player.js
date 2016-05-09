@@ -66,7 +66,7 @@ class Player {
                         break;
                     }
                 }
-            } catch(err) {
+            } catch (err) {
                 return false;
             }
         });
@@ -97,13 +97,13 @@ class Player {
 
     pause() {
         this._postToIframe({
-            command : 'blitzr_pause'
+            command: 'blitzr_pause'
         });
     }
 
     play() {
         this._postToIframe({
-            command : 'blitzr_play'
+            command: 'blitzr_play'
         });
     }
 
