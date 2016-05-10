@@ -36,8 +36,9 @@
                 onSetVolume(volume) {
                     console.log('VOLUME' + volume)
                 },
-                onPlay() {
+                onPlay(data) {
                     console.log('PLAY')
+                    console.log(data)
                 },
                 onPlaying() {
                     console.log(player.currentTime)
