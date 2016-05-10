@@ -52,19 +52,19 @@ class Player {
                     case 'blitzr_playing':
                         if (this._isPaused) {
                             this._isPaused = false;
-                            this._options.onPlay(e.data);
+                            this._options.onPlay(JSON.parse(e.data));
                             this._setVolume(this._volume);
                         }
                         this.currentTime = data.time;
                         this.duration = data.duration;
-                        this._options.onPlaying(e.data);
+                        this._options.onPlaying(JSON.parse(e.data));
                         break;
                     case 'blitzr_paused':
-                        this._options.onPause(e.data);
+                        this._options.onPause(JSON.parse(e.data));
                         this._isPaused = true;
                         break;
                     case 'blitzr_ended':
-                        this._options.onEnd(e.data);
+                        this._options.onEnd(JSON.parse(e.data));
                         break;
                     }
                 }
