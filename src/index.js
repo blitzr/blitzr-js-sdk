@@ -62,6 +62,46 @@ class Blitzr {
                 return self._sendToAPI('/track/sources/', data);
             }
         };
+
+        this.artist = {
+            get(data) {
+                return self._sendToAPI('/artist/', data);
+            },
+            aliases(data) {
+                return self._sendToAPI('/artist/aliases/', data);
+            },
+            bands(data) {
+                return self._sendToAPI('/artist/bands/', data);
+            },
+            biography(data) {
+                return self._sendToAPI('/artist/biography/', data);
+            },
+            events(data) {
+                return self._sendToAPI('/artist/events/', data);
+            },
+            harmonia(data) {
+                return self._sendToAPI('/artist/harmonia/', data);
+            },
+            members(data) {
+                return self._sendToAPI('/artist/members/', data);
+            },
+            related(data) {
+                return self._sendToAPI('/artist/related/', data);
+            },
+            releases(data) {
+                return self._sendToAPI('/artist/releases/', data);
+            },
+            similar(data) {
+                return self._sendToAPI('/artist/similar/', data);
+            },
+            summary(data) {
+                return self._sendToAPI('/artist/summary/', data);
+            },
+            websites(data) {
+                return self._sendToAPI('/artist/websites/', data);
+            }
+        };
+
     }
 
     _isEmpty(object) {
@@ -134,6 +174,22 @@ class Blitzr {
             }
         });
         return queryString.join('&');
+    }
+
+    set key(keyAPI) {
+        return this._key = keyAPI;
+    }
+
+    get key() {
+        return this._key;
+    }
+
+    event(data) {
+        return this._sendToAPI('/event/', data);
+    }
+
+    events(data) {
+        return this._sendToAPI('/events/', data);
     }
 }
 
