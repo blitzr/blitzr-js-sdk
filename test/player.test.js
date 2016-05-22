@@ -4,7 +4,7 @@ const Blitzr = require('../blitzr.js');
 const jsdom = require('mocha-jsdom');
 var player;
 
-describe('Player', function() {
+describe.only('Player', function() {
 
     jsdom();
     before(function() {
@@ -64,9 +64,29 @@ describe('Player', function() {
                 assert.equal(player._volume, 50);
             });
 
-            it('should call hook setVolume', function() {
+            it('should call hook onSetVolume', function() {
                 assert(player._options.onSetVolume.called);
             });
+        });
+
+        describe('#load', function() {
+            before(function() {
+                sinon.spy(player._options, 'onLoad');
+            });
+
+            after(function() {
+                player._options.onLoad.restore()
+            });
+
+            it('should set src of iframe', function() {
+                player.load('TR4567')
+                assert.equal(player._src, `http://player.blitzr.com/TR4567?t=${player._id}`)
+                assert.equal(player._iframe.src, `http://player.blitzr.com/TR4567?t=${player._id}`)
+            });
+
+            it('should call hook onLoad', function() {
+                assert(player._options.onLoad.called)
+            })
         });
     });
 });
