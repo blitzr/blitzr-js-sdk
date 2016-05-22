@@ -110,6 +110,9 @@ class Player {
     }
 
     seekTo(time) {
+        if (time < 0) {
+            time = 0;
+        }
         this._postToIframe({
             command: 'blitzr_seek',
             extra: time
@@ -118,6 +121,7 @@ class Player {
     }
 
     stop() {
+        this._src = '';
         this._iframe.setAttribute('src', '');
         this._options.onStop(this);
     }
