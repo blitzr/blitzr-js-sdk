@@ -6,7 +6,6 @@ class Blitzr {
             throw new Error('API Key is required for use Blitzr');
         }
         const self = this;
-        this.Player = Player;
         this._key = keyAPI;
 
         this.search = {
@@ -102,6 +101,10 @@ class Blitzr {
             }
         };
 
+    }
+
+    static player(target, options) {
+        return new Player(target, options);
     }
 
     _isEmpty(object) {
