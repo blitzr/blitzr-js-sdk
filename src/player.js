@@ -1,6 +1,6 @@
 const defaultOptions = {
     width: 200,
-    heigth: 200,
+    height: 200,
     initVolume: 100,
     onPlay() {},
     onPlaying() {},
