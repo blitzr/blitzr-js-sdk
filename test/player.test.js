@@ -76,6 +76,10 @@ describe('Player', function() {
             it('should call hook onSetVolume', function() {
                 assert(player._options.onSetVolume.called);
             });
+
+            it('should return value of current volume', function() {
+                assert.equal(player.volume, 50)
+            });
         });
     });
 
