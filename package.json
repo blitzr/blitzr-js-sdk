@@ -9,7 +9,7 @@
   "scripts": {
     "open": "google-chrome-stable ./example/index.html",
     "build": "browserify src/index.js -t babelify -s Blitzr --outfile blitzr.js",
-    "package": "npm run build && eslint --quiet ./src && mocha --reporter='dot' ./test && uglifyjs blitzr.js -o blitzr.min.js",
+    "package": "eslint --quiet ./src && npm run build && mocha --reporter='dot' ./test && uglifyjs blitzr.js -o blitzr.min.js",
     "lint": "eslint ./src ./test",
     "prepare-test": "babel ./test/blitzr.test.js --out-file ./test/blitzr.test.js",
     "test": "npm run build && mocha ./test",
