@@ -78,7 +78,7 @@ describe('Player', function() {
             });
 
             it('should return value of current volume', function() {
-                assert.equal(player.volume, 50)
+                assert.equal(player.volume, 50);
             });
         });
     });
@@ -89,17 +89,17 @@ describe('Player', function() {
         });
 
         after(function() {
-            player._options.onLoad.restore()
+            player._options.onLoad.restore();
         });
 
         it('should set src of iframe', function() {
-            player.load('TR4567')
-            assert.equal(player._src, `http://player.blitzr.com/TR4567?t=${player._id}`)
-            assert.equal(player._iframe.src, `http://player.blitzr.com/TR4567?t=${player._id}`)
+            player.load('TR4567');
+            assert.equal(player._src, `http://player.blitzr.com/TR4567?t=${player._id}`);
+            assert.equal(player._iframe.src, `http://player.blitzr.com/TR4567?t=${player._id}`);
         });
 
         it('should call hook onLoad', function() {
-            assert(player._options.onLoad.called)
+            assert(player._options.onLoad.called);
         });
     });
 

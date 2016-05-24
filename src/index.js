@@ -15,12 +15,6 @@ class Blitzr {
             artist(data) {
                 return self._sendToAPI('/search/artist/', data);
             },
-            city(data) {
-                return self._sendToAPI('/search/city/', data);
-            },
-            country(data) {
-                return self._sendToAPI('/search/country/', data);
-            },
             label(data) {
                 return self._sendToAPI('/search/label/', data);
             },
@@ -47,9 +41,6 @@ class Blitzr {
             },
             tag(data) {
                 return self._sendToAPI('/radio/tag/', data);
-            },
-            venue(data) {
-                return self._sendToAPI('/radio/venue/', data);
             }
         };
 
@@ -101,6 +92,89 @@ class Blitzr {
             }
         };
 
+        this.harmonia = {
+            artist(data) {
+                return self._sendToAPI('/harmonia/artist/', data);
+            },
+            label(data) {
+                return self._sendToAPI('/harmonia/label/', data);
+            },
+            tag(data) {
+                return self._sendToAPI('/harmonia/tag/', data);
+            },
+            searchBySource(data) {
+                return self._sendToAPI('/harmonia/searchbysource/', data);
+            }
+        };
+
+        this.label = {
+            get(data) {
+                return self._sendToAPI('/label/', data);
+            },
+            artists(data) {
+                return self._sendToAPI('/label/artists/', data);
+            },
+            biography(data) {
+                return self._sendToAPI('/label/biography/', data);
+            },
+            harmonia(data) {
+                return self._sendToAPI('/label/harmonia/', data);
+            },
+            releases(data) {
+                return self._sendToAPI('/label/releases/', data);
+            },
+            similar(data) {
+                return self._sendToAPI('/label/similar/', data);
+            }
+        };
+
+        this.releases = {
+            get(data) {
+                return self._sendToAPI('/releases/', data);
+            },
+            sources(data) {
+                return self._sendToAPI('/releases/sources/', data);
+            }
+        };
+
+        this.shop = {
+            artist(product, data) {
+                return self._sendToAPI(`/buy/artist/${product}/`, data);
+            },
+            label(product, data) {
+                return self._sendToAPI(`/buy/label/${product}/`, data);
+            },
+            release(product, data) {
+                return self._sendToAPI(`/buy/release/${product}/`, data);
+            },
+            track(data) {
+                return self._sendToAPI('/buy/track/', data);
+            }
+        };
+
+        this.tag = {
+            get(data) {
+                return self._sendToAPI('/tag/', data);
+            },
+            artists(data) {
+                return self._sendToAPI('/tag/artists/', data);
+            },
+            releases(data) {
+                return self._sendToAPI('/tag/releases/', data);
+            }
+        };
+
+        this.event = {
+            get(data) {
+                return self._sendToAPI('/event/', data);
+            }
+        };
+
+        this.events = {
+            get(data) {
+                return self._sendToAPI('/events/', data);
+            }
+        };
     }
 
     static player(target, options) {
@@ -185,14 +259,6 @@ class Blitzr {
 
     get key() {
         return this._key;
-    }
-
-    event(data) {
-        return this._sendToAPI('/event/', data);
-    }
-
-    events(data) {
-        return this._sendToAPI('/events/', data);
     }
 }
 
