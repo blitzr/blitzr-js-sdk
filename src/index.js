@@ -213,7 +213,7 @@ class Blitzr {
                     if (req.status === 200) {
                         resolve(JSON.parse(req.responseText));
                     } else {
-                        reject('Error on call API');
+                        reject(JSON.parse(req.responseText));
                     }
                 }
             };
