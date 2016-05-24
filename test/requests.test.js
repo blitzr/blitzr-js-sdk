@@ -41,23 +41,6 @@ describe('Request', function() {
                 query: 'the black keys'
             }]
         }, {
-            method: 'city',
-            url: '/search/city/',
-            queries: [{
-                query: 'paris'
-            }, {
-                query: 'Los',
-                autocomplete: true,
-                latitude: 42.1337,
-                longitude: -3.1416
-            }]
-        }, {
-            method: 'country',
-            url: '/search/country/',
-            queries: [{
-                country_code: 55
-            }]
-        }, {
             method: 'label',
             url: '/search/label/',
             queries: [{
@@ -110,12 +93,6 @@ describe('Request', function() {
             url: '/radio/tag/',
             queries: [{
                 slug: 'tag'
-            }]
-        }, {
-            method: 'venue',
-            url: '/radio/venue/',
-            queries: [{
-                venue: 'AccorHotels Arena'
             }]
         }];
 
@@ -218,19 +195,179 @@ describe('Request', function() {
         requestsTester(tests, 'artist');
     });
 
-    describe('#event', function() {
-        it(`should send request /event/ with right params`, function() {
-            return blitzr.event({ city: 'Paris' }).then(() => {
-                assert(blitzr._sendToAPI.calledWith('/event/', { city: 'Paris' }), '_sendToAPI is called with wrongs params');
+    describe('#harmonia', function() {
+        const tests = [{
+            method: 'artist',
+            url: '/harmonia/artist/',
+            queries: [{
+                service_name: 'fnac',
+                service_id: '13'
+            }]
+        }, {
+            method: 'label',
+            url: '/harmonia/label/',
+            queries: [{
+                service_name: 'fnac',
+                service_id: '13'
+            }]
+        }, {
+            method: 'tag',
+            url: '/harmonia/tag/',
+            queries: [{
+                service_name: 'fnac',
+                service_id: '13'
+            }]
+        }, {
+            method: 'searchBySource',
+            url: '/harmonia/searchbysource/',
+            queries: [{
+                service_name: 'fnac',
+                service_id: '13'
+            }]
+        }];
+
+        requestsTester(tests, 'harmonia');
+    });
+
+    describe('#label', function() {
+        const tests = [{
+            method: 'get',
+            url: '/label/',
+            queries: [{
+                slug: 'the-black-keys'
+            }]
+        }, {
+            method: 'artists',
+            url: '/label/artists/',
+            queries: [{
+                slug: 'the-black-keys'
+            }]
+        }, {
+            method: 'biography',
+            url: '/label/biography/',
+            queries: [{
+                slug: 'the-black-keys'
+            }]
+        }, {
+            method: 'harmonia',
+            url: '/label/harmonia/',
+            queries: [{
+                slug: 'the-black-keys'
+            }]
+        }, {
+            method: 'releases',
+            url: '/label/releases/',
+            queries: [{
+                slug: 'the-black-keys'
+            }]
+        }, {
+            method: 'similar',
+            url: '/label/similar/',
+            queries: [{
+                slug: 'the-black-keys'
+            }]
+        }];
+
+        requestsTester(tests, 'label');
+    });
+
+    describe('#releases', function() {
+        const tests = [{
+            method: 'get',
+            url: '/releases/',
+            queries: [{
+                slug: 'the-black-keys'
+            }]
+        }, {
+            method: 'sources',
+            url: '/releases/sources/',
+            queries: [{
+                slug: 'the-black-keys'
+            }]
+        }];
+
+        requestsTester(tests, 'releases');
+    });
+
+    describe('#shop', function() {
+        describe('.artist', function() {
+            it(`should send request /buy/artist/ with right params`, function() {
+                blitzr.shop.artist('fnac', { slug: 'the-black-keys' }).then(() => {
+                    assert(blitzr._sendToAPI.calledWith('/buy/artist/fnac/',  { slug: 'the-black-keys' }), '_sendToAPI is called with wrongs params');
+                });
+            });
+        });
+
+        describe('.label', function() {
+            it(`should send request /buy/label/ with right params`, function() {
+                blitzr.shop.label('fnac', { slug: 'the-black-keys' }).then(() => {
+                    assert(blitzr._sendToAPI.calledWith('/buy/label/fnac/',  { slug: 'the-black-keys' }), '_sendToAPI is called with wrongs params');
+                });
+            });
+        });
+
+        describe('.release', function() {
+            it(`should send request /buy/release/ with right params`, function() {
+                blitzr.shop.release('fnac', { slug: 'the-black-keys' }).then(() => {
+                    assert(blitzr._sendToAPI.calledWith('/buy/release/fnac/',  { slug: 'the-black-keys' }), '_sendToAPI is called with wrongs params');
+                });
+            });
+        });
+
+        describe('.track', function() {
+            it(`should send request /buy/track/ with right params`, function() {
+                blitzr.shop.artist('fnac', { slug: 'the-black-keys' }).then(() => {
+                    assert(blitzr._sendToAPI.calledWith('/buy/track/fnac/',  { slug: 'the-black-keys' }), '_sendToAPI is called with wrongs params');
+                });
             });
         });
     });
 
-    describe('#events', function() {
-        it(`should send request /events/ with right params`, function() {
-            return blitzr.events({ city: 'Paris' }).then(() => {
-                assert(blitzr._sendToAPI.calledWith('/events/', { city: 'Paris' }), '_sendToAPI is called with wrongs params');
-            });
-        });
+    describe('#tag', function() {
+        const tests = [{
+            method: 'get',
+            url: '/tag/',
+            queries: [{
+                slug: 'rock'
+            }]
+        }, {
+            method: 'artists',
+            url: '/tag/artists/',
+            queries: [{
+                slug: 'rock'
+            }]
+        }, {
+            method: 'releases',
+            url: '/tag/releases/',
+            queries: [{
+                slug: 'rock'
+            }]
+        }];
+
+        requestsTester(tests, 'tag');
+    });
+
+    describe('#event', function() {
+        const tests = [{
+            method: 'get',
+            url: '/event/',
+            queries: [{
+                city: 'Paris'
+            }]
+        }];
+
+        requestsTester(tests, 'event');
+    });
+
+    describe('#event', function() {
+        const tests = [{
+            method: 'get',
+            url: '/events/',
+            queries: [{
+                city: 'Paris'
+            }]
+        }];
+
+        requestsTester(tests, 'events');
     });
 });
