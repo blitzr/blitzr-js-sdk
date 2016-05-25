@@ -1,6 +1,6 @@
-const assert = require('assert');
-const sinon = require('sinon');
-const jsdom = require('mocha-jsdom');
+import assert from 'assert';
+import sinon from 'sinon';
+import jsdom from 'mocha-jsdom';
 import Blitzr from '../blitzr.js';
 var player;
 

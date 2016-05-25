@@ -1,5 +1,5 @@
-const assert = require('assert');
-const sinon = require('sinon');
+import assert from 'assert';
+import sinon from 'sinon';
 import Blitzr from '../blitzr.js';
 const blitzr = new Blitzr('f1a14162e95f6f0afd4d');
 
