@@ -52,19 +52,19 @@ class Player {
                     case 'blitzr_playing':
                         if (this._isPaused) {
                             this._isPaused = false;
-                            this._options.onPlay(JSON.parse(e.data));
+                            this._options.onPlay.call(this, JSON.parse(e.data));
                             this._setVolume(this._volume);
                         }
-                        this.currentTime = data.time;
-                        this.duration = data.duration;
-                        this._options.onPlaying(JSON.parse(e.data));
+                        this._currentTime = data.time;
+                        this._duration = data.duration;
+                        this._options.onPlaying.call(this, JSON.parse(e.data));
                         break;
                     case 'blitzr_paused':
-                        this._options.onPause(JSON.parse(e.data));
+                        this._options.onPause.call(this, JSON.parse(e.data));
                         this._isPaused = true;
                         break;
                     case 'blitzr_ended':
-                        this._options.onEnd(JSON.parse(e.data));
+                        this._options.onEnd.call(this, JSON.parse(e.data));
                         break;
                     }
                 }
@@ -94,7 +94,7 @@ class Player {
     load(track) {
         this._src = `http://player.blitzr.com/${track}?t=${this._id}`;
         this._iframe.setAttribute('src', this._src);
-        this._options.onLoad(this);
+        this._options.onLoad.call(this);
     }
 
     pause() {
@@ -117,22 +117,32 @@ class Player {
             command: 'blitzr_seek',
             extra: time
         });
-        this._options.onSeekTo(time, this);
+        this._options.onSeekTo.call(this, time);
     }
 
     stop() {
+        this._currentTime = 0;
+        this._duration = 0;
         this._src = '';
         this._iframe.setAttribute('src', '');
-        this._options.onStop(this);
+        this._options.onStop.call(this);
     }
 
     set volume(volume) {
         this._setVolume(volume);
-        this._options.onSetVolume(volume, this);
+        this._options.onSetVolume.call(this, volume);
     }
 
     get volume() {
         return this._volume;
+    }
+
+    get currentTime() {
+        return this._currentTime || 0;
+    }
+
+    get duration() {
+        return this._duration || 0;
     }
 }
 
