@@ -12,7 +12,15 @@ const defaultOptions = {
     onEnd() {}
 };
 
+/**
+ * Player provide methods to control playlist
+ */
 class Player {
+    /**
+     * Create an instance Player
+     * @param {string} - id of DOM element
+     * @param {object} [options=defaultOptions] - options 
+     */
     constructor(target, options = {}) {
         // Select DOM element
         this._el = document.getElementById(target);

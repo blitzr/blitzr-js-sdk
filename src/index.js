@@ -1,6 +1,13 @@
 const Player = require('./player.js');
 
+/**
+ * Blitzr provide methods to call API Blitzr
+ */
 class Blitzr {
+    /**
+     * API Key is required to use all methods
+     * @param {string} - API Key
+     */
     constructor(keyAPI) {
         if (!keyAPI) {
             throw new Error('API Key is required for use Blitzr');
