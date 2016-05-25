@@ -5,6 +5,10 @@
     "node": true,
     "mocha": true
   },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
   "extends": "eslint:recommended",
   "rules": {
     "indent": [
@@ -37,7 +41,6 @@
     "computed-property-spacing": "error",
     "key-spacing": "error",
     "keyword-spacing": "error",
-    "lines-around-comment": "error",
     "max-depth": "warn",
     "max-len": [
       "warn",

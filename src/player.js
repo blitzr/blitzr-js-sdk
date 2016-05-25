@@ -15,11 +15,11 @@ const defaultOptions = {
 /**
  * Player provide methods to control playlist
  */
-class Player {
+export default class Player {
     /**
      * Create an instance Player
      * @param {string} - id of DOM element
-     * @param {object} [options=defaultOptions] - options 
+     * @param {object} [options=defaultOptions] - options
      */
     constructor(target, options = {}) {
         // Select DOM element
@@ -153,5 +153,3 @@ class Player {
         return this._duration || 0;
     }
 }
-
-module.exports = Player;

@@ -1,7 +1,7 @@
 const assert = require('assert');
 const sinon = require('sinon');
-const Blitzr = require('../blitzr.js');
 const jsdom = require('mocha-jsdom');
+import Blitzr from '../blitzr.js';
 var player;
 
 describe('Player', function() {

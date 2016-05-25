@@ -1,6 +1,7 @@
 const assert = require('assert');
 const sinon = require('sinon');
-const Blitzr = require('../blitzr.js');
+import Blitzr from '../blitzr.js';
+debugger;
 const blitzr = new Blitzr('f1a14162e95f6f0afd4d');
 
 describe('Blitzr', function() {
