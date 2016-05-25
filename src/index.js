@@ -1,9 +1,9 @@
-const Player = require('./player.js');
+import Player from './player.js';
 
 /**
  * Blitzr provide methods to call API Blitzr
  */
-class Blitzr {
+export default class Blitzr {
     /**
      * API Key is required to use all methods
      * @param {string} - API Key
@@ -268,5 +268,3 @@ class Blitzr {
         return this._key;
     }
 }
-
-module.exports = Blitzr;

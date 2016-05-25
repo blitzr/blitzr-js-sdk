@@ -9,11 +9,10 @@
   "scripts": {
     "open": "google-chrome-stable ./example/index.html",
     "build": "browserify src/index.js -t babelify -s Blitzr --outfile blitzr.js",
-    "package": "eslint --quiet ./src && npm run build && mocha --reporter='dot' ./test && uglifyjs blitzr.js -o blitzr.min.js",
+    "package": "eslint --quiet ./src && npm run build && mocha --compilers js:babel-core/register --reporter='dot' ./test && uglifyjs blitzr.js -o blitzr.min.js",
     "lint": "eslint ./src ./test",
-    "prepare-test": "babel ./test/blitzr.test.js --out-file ./test/blitzr.test.js",
-    "test": "npm run build && mocha ./test",
-    "debug-mocha": "npm run build && iron-node node_modules/mocha/bin/_mocha"
+    "test": "npm run build && mocha --compilers js:babel-core/register",
+    "debug-mocha": "npm run build && iron-node node_modules/mocha/bin/_mocha --compilers js:babel-core/register"
   },
   "browser": "./blitzr.min.js",
   "babel": {
