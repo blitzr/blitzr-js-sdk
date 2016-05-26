@@ -20,6 +20,7 @@ export default class Player {
      * Create an instance Player
      * @param {string} - id of DOM element
      * @param {object} [options=defaultOptions] - options
+     * @see http://blitzr.github.io/blitzr-js-sdk/index.html#player
      */
     constructor(target, options = {}) {
         // Select DOM element
@@ -99,27 +100,43 @@ export default class Player {
         this._volume = volume;
     }
 
+    /**
+     * Load a track by uuid and play the track
+     * @param {string} track - uuid of the track
+     */
     load(track) {
         this._src = `http://player.blitzr.com/${track}?t=${this._id}`;
         this._iframe.setAttribute('src', this._src);
         this._options.onLoad.call(this);
     }
 
+    /**
+     * pause the current track
+     */
     pause() {
         this._postToIframe({
             command: 'blitzr_pause'
         });
     }
 
+    /**
+     * play the current track
+     */
     play() {
         this._postToIframe({
             command: 'blitzr_play'
         });
     }
 
+    /**
+     * play the current track at the given time
+     * @param {number} time - in second
+     */
     seekTo(time) {
         if (time < 0) {
             time = 0;
+        } else if (time > this._duration) {
+            time = this._duration;
         }
         this._postToIframe({
             command: 'blitzr_seek',
@@ -128,6 +145,9 @@ export default class Player {
         this._options.onSeekTo.call(this, time);
     }
 
+    /**
+     * stop the current track
+     */
     stop() {
         this._currentTime = 0;
         this._duration = 0;
@@ -136,19 +156,35 @@ export default class Player {
         this._options.onStop.call(this);
     }
 
+    /**
+     * set volume
+     * @param {number} volume - in percentage
+     */
     set volume(volume) {
         this._setVolume(volume);
         this._options.onSetVolume.call(this, volume);
     }
 
+    /**
+     * get volume
+     * @return {number} in percentage
+     */
     get volume() {
         return this._volume;
     }
 
+    /**
+     * get volume
+     * @return {float} in seconds
+     */
     get currentTime() {
         return this._currentTime || 0;
     }
 
+    /**
+     * get duration
+     * @return {float} in seconds
+     */
     get duration() {
         return this._duration || 0;
     }
