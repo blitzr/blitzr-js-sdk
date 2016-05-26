@@ -1,18 +1,18 @@
 {
   "name": "blitzr-js-sdk",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "SDK javascript for blitzr API",
   "main": "blitzr.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "open": "google-chrome-stable ./example/index.html",
     "build": "browserify src/index.js -t babelify -s Blitzr --outfile blitzr.js",
     "package": "eslint --quiet ./src && npm run build && mocha --compilers js:babel-core/register --reporter='dot' ./test && uglifyjs blitzr.js -o blitzr.min.js",
     "lint": "eslint ./src ./test",
     "test": "npm run build && mocha --compilers js:babel-core/register",
-    "debug-mocha": "npm run build && iron-node node_modules/mocha/bin/_mocha --compilers js:babel-core/register"
+    "debug-mocha": "npm run build && iron-node node_modules/mocha/bin/_mocha --compilers js:babel-core/register",
+    "prepublish": "npm run package"
   },
   "browser": "./blitzr.min.js",
   "babel": {

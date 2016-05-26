@@ -77,8 +77,8 @@ const options = {
     onPlaying(data) {},
     onPause(data) {},
     onLoad() {},
-    onSeekTo(time) {}, // Time is a new time
-    onSetVolume(volume) {}, // Volume is a new volume
+    onSeekTo(time) {}, // time is a new time
+    onSetVolume(volume) {}, // volume is a new volume
     onStop() {},
     onEnd(data) {}
 };
