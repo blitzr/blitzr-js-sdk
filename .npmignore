@@ -1,5 +1,6 @@
 example/
 src/
 test/
+dist/
 .eslintrc.json
-blitzr.min.js
+.gitignore

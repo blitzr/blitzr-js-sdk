@@ -1,6 +1,7 @@
 import assert from 'assert';
 import sinon from 'sinon';
-import Blitzr from '../blitzr.js';
+import Blitzr from '../src/blitzr.js';
+
 const blitzr = new Blitzr('f1a14162e95f6f0afd4d');
 
 function requestsTester(tests, property) {
