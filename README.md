@@ -5,6 +5,10 @@ This client makes it easy to deal with Blitzr API and create player.
 
 To use this client you will need an API key, you can request it at : [developer.blitzr.com](http://developer.blitzr.com/).
 
+[documention API](http://api.blitzr.com/doc)
+
+[documentation SDK](http://blitzr.github.io/blitzr-js-sdk/index.html)
+
 Install
 -----
 ```
@@ -25,7 +29,7 @@ blitzr.search.artist({ query: 'myArtist' }).then(result => {
     // error callback
 })
 ```
-You can find the document of all methods to call API [here](#).
+You can find the document API [here](http://api.blitzr.com/doc).
 
 #### Player
 The player provide methods to control playlists.
@@ -33,7 +37,7 @@ The player provide methods to control playlists.
  - play
  - pause
  - stop
- - seekTo  
+ - seekTo
  - volume  
 
 First, create in your html a tag with an id.
