@@ -7,7 +7,7 @@ To use this client you will need an API key, you can request it at : [developer.
 
 [documention API](http://api.blitzr.com/doc)
 
-[documentation SDK](http://blitzr.github.io/blitzr-js-sdk/index.html)
+[reference SDK](http://blitzr.github.io/blitzr-js-sdk/index.html)
 
 Install
 -----
@@ -61,7 +61,7 @@ player.volume = 50 // volume in percentage
 
 player.currentTime // time of current track in seconds
 
-player.duration // duration of current track is seconds
+player.duration // duration of current track in seconds
 
 player.stop()
 ```
@@ -88,7 +88,12 @@ const player = Blitzr.player('player', options)
 
 In hooks,
  - `this` is the player instance
- - `data` is an object provided by iframe it look like this
+ - `data` is an object provided by iframe
+
+You can get `data` with hooks :
+ - onPlay, it's call on start of each tracks
+ - onPlaying, it's call every seconds during the play track
+ - onEnd, it's call on end of each tracks
 
 ```javascript
 {
