@@ -211,8 +211,8 @@ describe('Request', function() {
                 service_id: '13'
             }]
         }, {
-            method: 'tag',
-            url: '/harmonia/tag/',
+            method: 'release',
+            url: '/harmonia/release/',
             queries: [{
                 service_name: 'fnac',
                 service_id: '13'

@@ -2,11 +2,12 @@ import Player from './player.js';
 
 /**
  * Blitzr provide methods to call API Blitzr
+ * @see http://api.blitzr.com/doc
  */
 export default class Blitzr {
     /**
-     * API Key is required to use all methods
-     * @param {string} - API Key
+     * Create instance
+     * @param {string} keyAPI API Key is required to use all methods
      */
     constructor(keyAPI) {
         if (!keyAPI) {
@@ -15,6 +16,19 @@ export default class Blitzr {
         const self = this;
         this._key = keyAPI;
 
+        /**
+         * Provide search methods - All methods return a promise
+         * @type {object}
+         * @property {function} all - Get search results
+         * @property {function} artist - Get artist search results
+         * @property {function} label - Get label search results
+         * @property {function} release - Get release search results
+         * @property {function} track - Get track search results
+         * @example
+         * const result = []
+         * blitzr.search.artist({ query: 'myQuery' }).then(res => { result = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.search = {
             all(data) {
                 return self._sendToAPI('/search/', data);
@@ -33,6 +47,19 @@ export default class Blitzr {
             }
         };
 
+        /**
+         * Provide radio methods - All methods return a promise
+         * @type {object}
+         * @property {function} artist - Get artist radio
+         * @property {function} artistSimilar - Get similar artists radio
+         * @property {function} event - Get event radio
+         * @property {function} label - Get label radio
+         * @property {function} tag - Get track tag radio
+         * @example
+         * const playlist = []
+         * blitzr.radio.artist({ uuid: 'uuid' }).then(res => { playlist = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.radio = {
             artist(data) {
                 return self._sendToAPI('/radio/artist/', data);
@@ -51,6 +78,16 @@ export default class Blitzr {
             }
         };
 
+        /**
+         * Provide track methods - All methods return a promise
+         * @type {object}
+         * @property {function} get - Get track
+         * @property {function} sources - Get track sources
+         * @example
+         * const track = {}
+         * blitzr.track.get({ uuid: 'uuid' }).then(res => { track = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.track = {
             get(data) {
                 return self._sendToAPI('/track/', data);
@@ -60,6 +97,26 @@ export default class Blitzr {
             }
         };
 
+        /**
+         * Provide artist methods - All methods return a promise
+         * @type {object}
+         * @property {function} get - Get artist
+         * @property {function} aliases - Get artist aliases
+         * @property {function} bands - Get bands for artist
+         * @property {function} biography - Get artist biography
+         * @property {function} events - Get artist events
+         * @property {function} harmonia - Get harmonia
+         * @property {function} members - Get artist members
+         * @property {function} related - Get related artist
+         * @property {function} releases - Get artist releases
+         * @property {function} similar - Get similar artists
+         * @property {function} summary - Get artist generated summary
+         * @property {function} websites - Get artist websites
+         * @example
+         * const result = []
+         * blitzr.artist.get({ uuid: 'uuid' }).then(res => { result = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.artist = {
             get(data) {
                 return self._sendToAPI('/artist/', data);
@@ -99,6 +156,18 @@ export default class Blitzr {
             }
         };
 
+        /**
+         * Provide harmonia methods - All methods return a promise
+         * @type {object}
+         * @property {function} artist - Get artist by service id
+         * @property {function} label - Get label by service id
+         * @property {function} release - Get release by service id
+         * @property {function} searchBySource - Get tracks for source
+         * @example
+         * const result = []
+         * blitzr.harmonia.artist({ service_name: 'spotify', service_id: 'spotify_id' }).then(res => { result = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.harmonia = {
             artist(data) {
                 return self._sendToAPI('/harmonia/artist/', data);
@@ -106,14 +175,29 @@ export default class Blitzr {
             label(data) {
                 return self._sendToAPI('/harmonia/label/', data);
             },
-            tag(data) {
-                return self._sendToAPI('/harmonia/tag/', data);
+            release(data) {
+                return self._sendToAPI('/harmonia/release/', data);
             },
             searchBySource(data) {
                 return self._sendToAPI('/harmonia/searchbysource/', data);
             }
         };
 
+        /**
+         * Provide label methods - All methods return a promise
+         * @type {object}
+         * @property {function} get - Get label
+         * @property {function} artist - Get label artist
+         * @property {function} biography - Get label biography
+         * @property {function} harmonia - Get harmonia
+         * @property {function} releases - Get label releases
+         * @property {function} similar - Get similar labels
+         * @property {function} websites - Get artist websites
+         * @example
+         * const result = []
+         * blitzr.label.get({ uuid: 'uuid' }).then(res => { result = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.label = {
             get(data) {
                 return self._sendToAPI('/label/', data);
@@ -132,9 +216,22 @@ export default class Blitzr {
             },
             similar(data) {
                 return self._sendToAPI('/label/similar/', data);
+            },
+            websites(data) {
+                return self._sendToAPI('/label/websites', data);
             }
         };
 
+        /**
+         * Provide releases methods - All methods return a promise
+         * @type {object}
+         * @property {function} get - Get release
+         * @property {function} sources - Get release sources
+         * @example
+         * const result = []
+         * blitzr.releases.get({ uuid: 'uuid' }).then(res => { result = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.releases = {
             get(data) {
                 return self._sendToAPI('/releases/', data);
@@ -144,6 +241,18 @@ export default class Blitzr {
             }
         };
 
+        /**
+         * Provide shop methods - All methods return a promise
+         * @type {object}
+         * @property {function} artist - Get artist items
+         * @property {function} label - Get label items
+         * @property {function} release - Get release items
+         * @property {function} track - Get track items
+         * @example
+         * const result = []
+         * blitzr.shop.artist('mp3', { uuid: 'uuid' }).then(res => { result = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.shop = {
             artist(product, data) {
                 return self._sendToAPI(`/buy/artist/${product}/`, data);
@@ -159,6 +268,17 @@ export default class Blitzr {
             }
         };
 
+        /**
+         * Provide tag methods - All methods return a promise
+         * @type {object}
+         * @property {function} get - Get tag
+         * @property {function} artists - Get tag artists
+         * @property {function} release - Get tag releases
+         * @example
+         * const tag = ''
+         * blitzr.tag.get({ slug: 'slug' }).then(res => { tag = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.tag = {
             get(data) {
                 return self._sendToAPI('/tag/', data);
@@ -171,12 +291,30 @@ export default class Blitzr {
             }
         };
 
+        /**
+         * Provide event method - return a promise
+         * @type {object}
+         * @property {function} get - Get event details
+         * @example
+         * const event = {}
+         * blitzr.event.get({ slug: 'slug' }).then(res => { event = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.event = {
             get(data) {
                 return self._sendToAPI('/event/', data);
             }
         };
 
+        /**
+         * Provide events method - return a promise
+         * @type {object}
+         * @property {function} get - Get events
+         * @example
+         * const events = []
+         * blitzr.events.get({ slug: 'slug' }).then(res => { events = res })
+         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
+         */
         this.events = {
             get(data) {
                 return self._sendToAPI('/events/', data);
@@ -184,7 +322,14 @@ export default class Blitzr {
         };
     }
 
-    static player(target, options) {
+    /**
+     * Create an instance of Player
+     * @param {string} target - id of DOM element
+     * @param {object} [options={}] - More informations
+     * @return {Player}
+     * @see http://blitzr.github.io/blitzr-js-sdk/index.html#player
+     */
+    static player(target, options = {}) {
         return new Player(target, options);
     }
 
@@ -260,10 +405,16 @@ export default class Blitzr {
         return queryString.join('&');
     }
 
+    /**
+     * Set a new API Key
+     */
     set key(keyAPI) {
-        return this._key = keyAPI;
+        this._key = keyAPI;
     }
 
+    /**
+     * Get the current API Key
+     */
     get key() {
         return this._key;
     }
