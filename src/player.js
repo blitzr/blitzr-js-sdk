@@ -63,9 +63,9 @@ export default class Player {
                             this._isPaused = false;
                             this._options.onPlay.call(this, JSON.parse(e.data));
                             this._setVolume(this._volume);
+                            this._duration = data.duration;
                         }
                         this._currentTime = data.time;
-                        this._duration = data.duration;
                         this._options.onPlaying.call(this, JSON.parse(e.data));
                         break;
                     case 'blitzr_paused':
@@ -73,6 +73,7 @@ export default class Player {
                         this._isPaused = true;
                         break;
                     case 'blitzr_ended':
+                        this._isPaused = true;
                         this._options.onEnd.call(this, JSON.parse(e.data));
                         break;
                     }
