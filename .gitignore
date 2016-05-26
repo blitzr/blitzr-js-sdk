@@ -1,4 +1,3 @@
 /node_modules
 npm-debug.log
-/blitzr.js
-/blitzr.min.js
+/lib

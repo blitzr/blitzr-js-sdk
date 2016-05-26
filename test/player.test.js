@@ -1,7 +1,8 @@
 import assert from 'assert';
 import sinon from 'sinon';
 import jsdom from 'mocha-jsdom';
-import Blitzr from '../blitzr.js';
+import Blitzr from '../src/blitzr.js';
+
 var player;
 
 describe('Player', function() {
