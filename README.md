@@ -17,7 +17,7 @@ npm i blitzr-js-sdk --save-dev
 
 Usage
 ----
-#### Create a insantence and call API
+#### Create a instance and call API
 ```javascript
 const Blitzr = require('blitzr-js-sdk')
 
@@ -32,7 +32,7 @@ blitzr.search.artist({ query: 'myArtist' }).then(result => {
 You can find the document API [here](http://api.blitzr.com/doc).
 
 #### Player
-The player provide methods to control playlists.
+The player provides methods to control playlists.
  - load
  - play
  - pause
@@ -45,7 +45,7 @@ First, create in your html a tag with an id.
 <div id="player"></div>
 ```
 
-Then create an instance of Player and load an track by UUID
+Then create an instance of Player and load a track by UUID
 ```javascript
 const player = Blitzr.player('player', options)
 
@@ -91,8 +91,8 @@ In hooks,
  - `data` is an object provided by iframe
 
 You can get `data` with hooks :
- - onPlay, it's call on start of each tracks
- - onPlaying, it's call every seconds during the play track
+ - onPlay, it's called on start of each track
+ - onPlaying, it's called every second during the play track
  - onEnd, it's call on end of each tracks
 
 ```javascript
