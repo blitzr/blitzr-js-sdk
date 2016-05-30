@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 /**
- * Player provide methods to control playlist
+ * Player provides methods to control playlist
  */
 export default class Player {
     /**

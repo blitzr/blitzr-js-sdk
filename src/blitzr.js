@@ -79,7 +79,7 @@ export default class Blitzr {
         };
 
         /**
-         * Provide track methods - All methods return a promise
+         * Provides track methods - All methods return a promise
          * @type {object}
          * @property {function} get - Get track
          * @property {function} sources - Get track sources
