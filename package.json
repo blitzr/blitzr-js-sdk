@@ -1,6 +1,6 @@
 {
   "name": "blitzr-js-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "SDK javascript for blitzr API",
   "main": "lib/blitzr.js",
   "scripts": {
