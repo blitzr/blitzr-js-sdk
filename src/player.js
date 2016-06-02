@@ -106,6 +106,7 @@ export default class Player {
      * @param {string} track - uuid of the track
      */
     load(track) {
+        this._isPaused = true;
         this._src = `http://player.blitzr.com/${track}?t=${this._id}`;
         this._iframe.setAttribute('src', this._src);
         this._options.onLoad.call(this);
