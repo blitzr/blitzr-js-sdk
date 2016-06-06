@@ -1,4 +1,4 @@
-const Blitzr = require('../lib/blitzr.js').default;
+const Blitzr = require('../lib/index.js');
 
 const blitzr = new Blitzr('f1a14162e95f6f0');
 
