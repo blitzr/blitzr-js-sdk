@@ -4,7 +4,7 @@
   "description": "SDK javascript for blitzr API",
   "main": "lib/blitzr.js",
   "scripts": {
-    "build:standalone": "browserify src/index.js -s Blitzr -t babelify | uglifyjs -o dist/blitzr.js",
+    "build:standalone": "browserify src/index.js -i xmlhttprequest -s Blitzr -t babelify | uglifyjs -o dist/blitzr.js",
     "build:compile": "babel src --ignore index.js -d lib",
     "build": "npm run build:compile && npm run build:standalone",
     "package": "eslint --quiet ./src && mocha --compilers js:babel-core/register --reporter='dot' ./test  && npm run build",
@@ -12,6 +12,9 @@
     "test": "mocha --compilers js:babel-core/register",
     "debug-mocha": "iron-node node_modules/mocha/bin/_mocha --compilers js:babel-core/register",
     "prepublish": "npm run package"
+  },
+  "browser": {
+    "./lib/xhr.js": "./lib/xhr-browser.js"
   },
   "babel": {
     "presets": [
@@ -45,5 +48,9 @@
     "mocha-jsdom": "^1.1.0",
     "sinon": "^1.17.3",
     "uglify-js": "^2.6.2"
+  },
+  "dependencies": {
+    "superagent": "^2.0.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
