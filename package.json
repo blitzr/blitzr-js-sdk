@@ -50,7 +50,6 @@
     "uglify-js": "^2.6.2"
   },
   "dependencies": {
-    "superagent": "^2.0.0",
     "xmlhttprequest": "^1.8.0"
   }
 }
