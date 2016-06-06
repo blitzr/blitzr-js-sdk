@@ -1,4 +1,5 @@
 import Player from './player.js';
+import XMLHttpRequest from './xhr.js';
 
 /**
  * Blitzr provide methods to call API Blitzr
