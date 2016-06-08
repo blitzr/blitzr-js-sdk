@@ -233,12 +233,12 @@ export default class Blitzr {
          * blitzr.releases.get({ uuid: 'uuid' }).then(res => { result = res })
          * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
          */
-        this.releases = {
+        this.release = {
             get(data) {
-                return self._sendToAPI('/releases/', data);
+                return self._sendToAPI('/release/', data);
             },
             sources(data) {
-                return self._sendToAPI('/releases/sources/', data);
+                return self._sendToAPI('/release/sources/', data);
             }
         };
 
