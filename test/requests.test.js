@@ -272,22 +272,22 @@ describe('Request', function() {
         requestsTester(tests, 'label');
     });
 
-    describe('#releases', function() {
+    describe('#release', function() {
         const tests = [{
             method: 'get',
-            url: '/releases/',
+            url: '/release/',
             queries: [{
                 slug: 'the-black-keys'
             }]
         }, {
             method: 'sources',
-            url: '/releases/sources/',
+            url: '/release/sources/',
             queries: [{
                 slug: 'the-black-keys'
             }]
         }];
 
-        requestsTester(tests, 'releases');
+        requestsTester(tests, 'release');
     });
 
     describe('#shop', function() {
