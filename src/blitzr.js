@@ -366,7 +366,7 @@ export default class Blitzr {
                     if (req.status === 200) {
                         resolve(JSON.parse(req.responseText));
                     } else {
-                        reject(JSON.parse(req.responseText));
+                        reject(req.responseText);
                     }
                 }
             };
