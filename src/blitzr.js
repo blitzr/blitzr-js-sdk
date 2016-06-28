@@ -6,6 +6,7 @@ import XMLHttpRequest from './xhr.js';
  * @see http://api.blitzr.com/doc
  */
 export default class Blitzr {
+
     /**
      * Create instance
      * @param {string} keyAPI API Key is required to use all methods
@@ -25,6 +26,7 @@ export default class Blitzr {
          * @property {function} label - Get label search results
          * @property {function} release - Get release search results
          * @property {function} track - Get track search results
+         * @property {function} event - Get event search results
          * @example
          * const result = []
          * blitzr.search.artist({ query: 'myQuery' }).then(res => { result = res })
@@ -45,6 +47,9 @@ export default class Blitzr {
             },
             track(data) {
                 return self._sendToAPI('/search/track/', data);
+            },
+            event(data) {
+                return self._sendToAPI('/search/event/', data);
             }
         };
 
@@ -306,21 +311,6 @@ export default class Blitzr {
                 return self._sendToAPI('/event/', data);
             }
         };
-
-        /**
-         * Provide events method - return a promise
-         * @type {object}
-         * @property {function} get - Get events
-         * @example
-         * const events = []
-         * blitzr.events.get({ slug: 'slug' }).then(res => { events = res })
-         * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
-         */
-        this.events = {
-            get(data) {
-                return self._sendToAPI('/events/', data);
-            }
-        };
     }
 
     /**
@@ -336,23 +326,26 @@ export default class Blitzr {
 
     _isEmpty(object) {
         switch (typeof object) {
-        case 'string':
-        case 'array':
-            return !object.length;
-        case 'object':
-            for (var key in object) {
-                if (object.hasOwnProperty(key)) {
-                    return false;
-                }
+            case 'string':
+            case 'array': {
+                return !object.length;
             }
-            return true;
-        default:
-            return false;
+            case 'object': {
+                for (var key in object) {
+                    if (object.hasOwnProperty(key)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            default: {
+                return false;
+            }
         }
     }
 
-    _sendToAPI(path, data) {
-        const location = 'https://api.blitzr.com';
+    _sendToAPI(path, data, location = 'https://api.blitzr.com') {
         const query = this._toQueryString(data);
         const key = '?key=' + this._key + '&';
         const url = location + path + key + query;
@@ -377,32 +370,36 @@ export default class Blitzr {
     _toQueryString(object, base) {
         const queryString = [];
 
-        Object.keys(object).forEach((key) => {
-            let result;
+        Object.keys(object).forEach(key => {
             const value = object[key];
+            let result = '';
 
             if (base) {
                 key = `${base}[${key}]`;
             }
             switch (typeof value) {
-            case 'object':
-                result = this._toQueryString(value, key);
-                break;
-            case 'array':
-                var qs = {};
-                value.forEach((val, i) => {
-                    qs[i] = val;
-                });
-                result = this._toQueryString(qs, key);
-                break;
-            default:
-                result = `${key}=${encodeURIComponent(value)}`;
+                case 'object': {
+                    result = this._toQueryString(value, key);
+                    break;
+                }
+                case 'array': {
+                    const qs = {};
+                    value.forEach((val, i) => {
+                        qs[i] = val;
+                    });
+                    result = this._toQueryString(qs, key);
+                    break;
+                }
+                default: {
+                    result = `${key}=${encodeURIComponent(value)}`;
+                }
             }
 
             if (!this._isEmpty(value)) {
                 queryString.push(result);
             }
         });
+
         return queryString.join('&');
     }
 

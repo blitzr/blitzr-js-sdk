@@ -59,6 +59,12 @@ describe('Request', function() {
             queries: [{
                 query: 'appel'
             }]
+        }, {
+            method: 'event',
+            url: '/search/event/',
+            queries: [{
+                query: 'Paris'
+            }]
         }];
 
         requestsTester(tests, 'search');
@@ -358,17 +364,5 @@ describe('Request', function() {
         }];
 
         requestsTester(tests, 'event');
-    });
-
-    describe('#event', function() {
-        const tests = [{
-            method: 'get',
-            url: '/events/',
-            queries: [{
-                city: 'Paris'
-            }]
-        }];
-
-        requestsTester(tests, 'events');
     });
 });

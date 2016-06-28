@@ -6,28 +6,28 @@
     "mocha": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
+      "ecmaVersion": 6,
+      "sourceType": "module"
   },
   "extends": "eslint:recommended",
   "rules": {
     "indent": [
       "error",
-      4
+      4,
+      {
+        "SwitchCase": 1
+      }
     ],
     "linebreak-style": [
       "error",
       "unix"
     ],
-    "quotes": [
+    "semi": "error",
+    "comma-dangle": [
       "error",
-      "single"
+      "only-multiline"
     ],
-    "semi": [
-      "error",
-      "always"
-    ],
-    "no-console": "warn",
+    "no-console": "off",
     "dot-notation": "error",
     "eqeqeq": "error",
     "yoda": [
@@ -41,6 +41,7 @@
     "computed-property-spacing": "error",
     "key-spacing": "error",
     "keyword-spacing": "error",
+    "lines-around-comment": "error",
     "max-depth": "warn",
     "max-len": [
       "warn",
@@ -50,7 +51,12 @@
       "warn",
       5
     ],
-    "new-cap": "error",
+    "new-cap": [
+      "error",
+      {
+        "properties": false
+      }
+    ],
     "new-parens": "error",
     "no-nested-ternary": "error",
     "no-spaced-func": "error",
@@ -64,16 +70,14 @@
         "allowTemplateLiterals": true
       }
     ],
-    "array-bracket-spacing" : [
-      "error",
-      "always",
-      {
-        "singleValue": false,
-        "objectsInArrays": false
-      }
-    ],
+    "no-array-constructor": "error",
+    "array-callback-return": "error",
     "arrow-body-style": "error",
     "arrow-spacing": "error",
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
     "object-shorthand": "error",
     "object-curly-spacing": [
       "error",
@@ -93,6 +97,8 @@
     ],
     "space-in-parens": "error",
     "space-infix-ops": "error",
-    "spaced-comment": "error"
+    "spaced-comment": "error",
+    "no-loop-func": "error",
+    "prefer-arrow-callback": "error"
   }
 }

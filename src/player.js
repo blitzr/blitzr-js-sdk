@@ -16,6 +16,7 @@ const defaultOptions = {
  * Player provides methods to control playlist
  */
 export default class Player {
+
     /**
      * Create an instance Player
      * @param {string} - id of DOM element
@@ -53,29 +54,32 @@ export default class Player {
         };
 
         // Lisen events
-        window.addEventListener('message', (e) => {
+        window.addEventListener('message', e => {
             try {
                 const data = JSON.parse(e.data);
                 if (data.identifier === this._id) {
                     switch (data.status) {
-                    case 'blitzr_playing':
-                        if (this._isPaused) {
-                            this._isPaused = false;
-                            this._options.onPlay.call(this, JSON.parse(e.data));
-                            this._setVolume(this._volume);
-                            this._duration = data.duration;
+                        case 'blitzr_playing': {
+                            if (this._isPaused) {
+                                this._isPaused = false;
+                                this._options.onPlay.call(this, JSON.parse(e.data));
+                                this._setVolume(this._volume);
+                                this._duration = data.duration;
+                            }
+                            this._currentTime = data.time;
+                            this._options.onPlaying.call(this, JSON.parse(e.data));
+                            break;
                         }
-                        this._currentTime = data.time;
-                        this._options.onPlaying.call(this, JSON.parse(e.data));
-                        break;
-                    case 'blitzr_paused':
-                        this._options.onPause.call(this, JSON.parse(e.data));
-                        this._isPaused = true;
-                        break;
-                    case 'blitzr_ended':
-                        this._isPaused = true;
-                        this._options.onEnd.call(this, JSON.parse(e.data));
-                        break;
+                        case 'blitzr_paused': {
+                            this._options.onPause.call(this, JSON.parse(e.data));
+                            this._isPaused = true;
+                            break;
+                        }
+                        case 'blitzr_ended': {
+                            this._isPaused = true;
+                            this._options.onEnd.call(this, JSON.parse(e.data));
+                            break;
+                        }
                     }
                 }
             } catch (err) {
