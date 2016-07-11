@@ -13,10 +13,11 @@ export default class Blitzr {
      */
     constructor(keyAPI) {
         if (!keyAPI) {
-            throw new Error('API Key is required for use Blitzr');
+            throw new Error('API Key is required to use Blitzr');
         }
         const self = this;
         this._key = keyAPI;
+        this.location = 'https://api.blitzr.com';
 
         /**
          * Provide search methods - All methods return a promise
@@ -345,7 +346,7 @@ export default class Blitzr {
         }
     }
 
-    _sendToAPI(path, data, location = 'https://api.blitzr.com') {
+    _sendToAPI(path, data, location = this.location) {
         const query = this._toQueryString(data);
         const key = '?key=' + this._key + '&';
         const url = location + path + key + query;
