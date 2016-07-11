@@ -95,8 +95,8 @@ describe('Player', function() {
 
         it('should set src of iframe', function() {
             player.load('TR4567');
-            assert.equal(player._src, `player.blitzr.com/TR4567?t=${player._id}`);
-            assert.equal(player._iframe.src, `player.blitzr.com/TR4567?t=${player._id}`);
+            assert.equal(player._src, `https://player.blitzr.com/TR4567?t=${player._id}`);
+            assert.equal(player._iframe.src, `https://player.blitzr.com/TR4567?t=${player._id}`);
         });
 
         it('should call hook onLoad', function() {
