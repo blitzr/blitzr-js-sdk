@@ -17,7 +17,7 @@ export default class Blitzr {
         }
         const self = this;
         this._key = keyAPI;
-        this.location = 'https://api.blitzr.com';
+        this._location = 'https://api.blitzr.com';
 
         /**
          * Provide search methods - All methods return a promise
@@ -346,7 +346,7 @@ export default class Blitzr {
         }
     }
 
-    _sendToAPI(path, data, location = this.location) {
+    _sendToAPI(path, data, location = this._location) {
         const query = this._toQueryString(data);
         const key = '?key=' + this._key + '&';
         const url = location + path + key + query;
