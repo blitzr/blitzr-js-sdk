@@ -6,14 +6,14 @@
     </head>
     <body>
         <div id="player"></div>
-        <button type="button" onclick="player.load('TRgi0mJrltMgp4qf9K')">Load</button>
+        <button type="button" onclick="player.load('TRObO8pkMOcvThG0hH')">Load</button>
         <button type="button" onclick="player.play()">Play</button>
         <button type="button" onclick="player.pause()">Pause</button>
         <button type="button" onclick="player.stop()">Stop</button>
 
         <script src="../dist/blitzr.js" charset="utf-8"></script>
         <script type="text/javascript">
-            var blitzr = new Blitzr('your_api_key');
+            var blitzr = new Blitzr('71a8b82a3d0939d4cc013b3f9307d7a9');
 
             var player = Blitzr.player('player', {
                 width: 600,
@@ -42,6 +42,10 @@
                 },
                 onPlaying() {
                     console.log(player.currentTime)
+                },
+                onNoSources(data) {
+                    console.log('NO SOURCES')
+                    console.log(data)
                 }
             });
 
