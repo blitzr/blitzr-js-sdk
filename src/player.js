@@ -9,7 +9,8 @@ const defaultOptions = {
     onSeekTo() {},
     onSetVolume() {},
     onStop() {},
-    onEnd() {}
+    onEnd() {},
+    onNoSources() {},
 };
 
 /**
@@ -78,6 +79,10 @@ export default class Player {
                         case 'blitzr_ended': {
                             this._isPaused = true;
                             this._options.onEnd.call(this, JSON.parse(e.data));
+                            break;
+                        }
+                        case 'blitzr_no_sources': {
+                            this._options.onNoSources.call(this, JSON.parse(e.data));
                             break;
                         }
                     }

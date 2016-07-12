@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Blitzr javascript SDK - example</title>
+    </head>
+    <body>
+        <div id="player"></div>
+        <button type="button" onclick="player.load('TRObO8pkMOcvThG0hH')">Load</button>
+        <button type="button" onclick="player.play()">Play</button>
+        <button type="button" onclick="player.pause()">Pause</button>
+        <button type="button" onclick="player.stop()">Stop</button>
+
+        <script src="../dist/blitzr.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var blitzr = new Blitzr('your_api_key');
+
+            var player = Blitzr.player('player', {
+                width: 600,
+                height: 500,
+                onPause() {
+                    console.log('PAUSE')
+                },
+                onEnd() {
+                    console.log('END')
+                },
+                onLoad() {
+                    console.log(this)
+                },
+                onStop() {
+                    console.log('STOP')
+                },
+                onSeekTo(time) {
+                    console.log('SEEK' + time)
+                },
+                onSetVolume(volume) {
+                    console.log('VOLUME' + volume)
+                },
+                onPlay(data) {
+                    console.log('PLAY')
+                    console.log(data)
+                },
+                onPlaying() {
+                    console.log(player.currentTime)
+                },
+                onNoSources(data) {
+                    console.log('NO SOURCES')
+                    console.log(data)
+                }
+            });
+
+        </script>
+    </body>
+</html>
