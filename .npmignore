@@ -4,3 +4,4 @@ test/
 dist/
 .eslintrc.json
 .gitignore
+docs/

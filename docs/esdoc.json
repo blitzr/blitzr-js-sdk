@@ -1,0 +1,17 @@
+{
+  "source": "../src",
+  "destination": ".",
+  "title": "Blitzr Javascript SDK -",
+  "index": "../README.md",
+  "plugins": [
+    {
+      "name": "esdoc-importpath-plugin",
+      "option": {
+        "replaces": [
+          {"from": "./src/index.js", "to": "blitzr-js-sdk"}
+        ]
+      }
+    }
+  ],
+  "includeSource": false
+}
