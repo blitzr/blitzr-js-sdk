@@ -1,6 +1,6 @@
 const Blitzr = require('../lib/index.js');
 
-const blitzr = new Blitzr(process.env.KEY_BLITZR_API);
+const blitzr = new Blitzr(process.env.BLITZR_API_KEY);
 
 blitzr.search.artist({ query: 'eminem' }).then(res => {
     console.log(res);

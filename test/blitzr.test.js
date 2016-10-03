@@ -50,22 +50,22 @@ describe('Blitzr', function() {
 
     describe('#_toQueryString', function() {
         it('should return string query', function() {
-            assert.equal(blitzr._toQueryString(data), queryString);
+            assert.equal(Blitzr._toQueryString(data), queryString);
         });
     });
 
     describe('#_isEmpty', function() {
         it('should return true for {}, "", []', function() {
-            assert(blitzr._isEmpty({}), 'object is not empty');
-            assert(blitzr._isEmpty(''), 'string is not empty');
-            assert(blitzr._isEmpty([]), 'array is not empty');
-            assert(!blitzr._isEmpty({ foo: 'bar' }), 'object is empty');
-            assert(!blitzr._isEmpty('foo'), 'string is empty');
-            assert(!blitzr._isEmpty([ 'foo', 'bar' ]), 'array is empty');
-            assert(!blitzr._isEmpty(0), '0 is considered empty');
-            assert(!blitzr._isEmpty(1), '1 is considered empty');
-            assert(!blitzr._isEmpty(false), 'false is considered empty');
-            assert(!blitzr._isEmpty(true), 'true is considered empty');
+            assert(Blitzr._isEmpty({}), 'object is not empty');
+            assert(Blitzr._isEmpty(''), 'string is not empty');
+            assert(Blitzr._isEmpty([]), 'array is not empty');
+            assert(!Blitzr._isEmpty({ foo: 'bar' }), 'object is empty');
+            assert(!Blitzr._isEmpty('foo'), 'string is empty');
+            assert(!Blitzr._isEmpty([ 'foo', 'bar' ]), 'array is empty');
+            assert(!Blitzr._isEmpty(0), '0 is considered empty');
+            assert(!Blitzr._isEmpty(1), '1 is considered empty');
+            assert(!Blitzr._isEmpty(false), 'false is considered empty');
+            assert(!Blitzr._isEmpty(true), 'true is considered empty');
         });
     });
 

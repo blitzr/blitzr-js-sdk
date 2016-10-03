@@ -325,14 +325,14 @@ export default class Blitzr {
         return new Player(target, options);
     }
 
-    _isEmpty(object) {
+    static _isEmpty(object) {
         switch (typeof object) {
             case 'string':
             case 'array': {
                 return !object.length;
             }
             case 'object': {
-                for (var key in object) {
+                for (const key in object) {
                     if (object.hasOwnProperty(key)) {
                         return false;
                     }
@@ -368,7 +368,7 @@ export default class Blitzr {
         });
     }
 
-    _toQueryString(object, base) {
+    static _toQueryString(object, base) {
         const queryString = [];
 
         Object.keys(object).forEach(key => {
@@ -380,7 +380,7 @@ export default class Blitzr {
             }
             switch (typeof value) {
                 case 'object': {
-                    result = this._toQueryString(value, key);
+                    result = Blitzr._toQueryString(value, key);
                     break;
                 }
                 case 'array': {
@@ -388,7 +388,7 @@ export default class Blitzr {
                     value.forEach((val, i) => {
                         qs[i] = val;
                     });
-                    result = this._toQueryString(qs, key);
+                    result = Blitzr._toQueryString(qs, key);
                     break;
                 }
                 default: {
@@ -396,7 +396,7 @@ export default class Blitzr {
                 }
             }
 
-            if (!this._isEmpty(value)) {
+            if (!Blitzr._isEmpty(value)) {
                 queryString.push(result);
             }
         });
