@@ -1,6 +1,16 @@
 language: node_js
 node_js:
-  - "6"
-  - "5"
-  - "4"
-  - "node"
+- '6'
+- '5'
+- '4'
+- node
+before_deploy: npm version $TRAVIS_TAG
+deploy:
+  provider: npm
+  email: developer@blitzr.com
+  api_key:
+    secure: 2HMlf8Co7N5ALikE0MDWXYmze+JlNTon1INx3PDbkflV3CALJT35H/FCUmhWWu1gAMxSU9yg47NrzKdkts/7THQ6+td5T/TpdNyydu7Zy1M4jTOLBPzsGFTQFoEr7hdrcr368GLg1+QAS1oUfs4iO15Cn2iXTN0zB+UEszp/+gEIeHnx4snenvhj2Q8z+TRggF/eq/+Yth5HW8j5AY6FJFipVRnOfqv2iC6slYJZ+HHFRWfCa19ybUkPvBkwlb8q/+2EQUPmEaEFpfR2CH0lWymQBQx+iEd4X7kWcvmWgvHiCBAD0B5CIqzARcmIc097PlNrhlY6CqnIRWelMkYtjS1jfTqpZpSl/gqmOBiJrqpxahqhlQ89BJ4mHad9v1qO2vYINC0jiVZfdmPXXqWg3XnYo8IIyGGbb3fJh0Jg+Q19Mvs9aPCrKI0L08qmwoiflux9FtLH/gWxcCBR7Cb2+F1wA7FG/SBEA0jwRInbJ7bgqpajQWgb/lhpuUyLuqbgL1FEPEAe6nSyLMwZlaO4LJtGjN4VcBVIm/Oe5aoYzYh3vjTqjmYC901gc6iHUj9YBiIy/MgoSu0jX2tW0hrDcGSuEwac1Fnz/XW9Wfo+YbpPtc8+L3pwAWZce7fL/fnp2Hn8qHDczRudKOhp4INbInwQrJyivyBhGPaXSCRMFhU=
+  on:
+    tags: true
+    branch: master
+    repo: blitzr/blitzr-js-sdk
