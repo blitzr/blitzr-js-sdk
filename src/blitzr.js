@@ -347,7 +347,7 @@ export default class Blitzr {
     }
 
     _sendToAPI(path, data, location = this._location) {
-        const query = this._toQueryString(data);
+        const query = Blitzr._toQueryString(data);
         const key = '?key=' + this._key + '&';
         const url = location + path + key + query;
 

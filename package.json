@@ -1,16 +1,16 @@
 {
   "name": "blitzr-js-sdk",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "SDK javascript for blitzr API",
   "main": "lib/index.js",
   "scripts": {
     "build:standalone": "browserify src/index.js -i xmlhttprequest -s Blitzr -t babelify | uglifyjs -o dist/blitzr.js",
     "build:compile": "babel src -d lib",
     "build": "npm run build:compile && npm run build:standalone",
-    "package": "eslint --quiet ./src && mocha --compilers js:babel-core/register --reporter='dot' ./test  && npm run build",
+    "doc": "esdoc -c ./docs/esdoc.json",
+    "package": "eslint --quiet ./src && mocha --compilers js:babel-core/register --reporter='dot' ./test && npm run build",
     "lint": "eslint ./src",
     "test": "mocha --compilers js:babel-core/register",
-    "debug-mocha": "iron-node node_modules/mocha/bin/_mocha --compilers js:babel-core/register",
     "prepublish": "npm run package"
   },
   "browser": {
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "gogs@gogs.variusmediagroup.org:Blitzr/blitzr-js-sdk.git"
+    "url": "https://github.com/blitzr/blitzr-js-sdk"
   },
   "keywords": [
     "blitzr",
