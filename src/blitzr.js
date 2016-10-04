@@ -9,11 +9,11 @@ export default class Blitzr {
 
     /**
      * Create instance
-     * @param {string} keyAPI API Key is required to use all methods
+     * @param {string} keyAPI An API Key is required to use all methods
      */
     constructor(keyAPI) {
         if (!keyAPI) {
-            throw new Error('API Key is required to use Blitzr');
+            throw new Error('An API Key is required to use Blitzr');
         }
         const self = this;
         this._key = keyAPI;
