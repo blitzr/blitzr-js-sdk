@@ -51,7 +51,7 @@
         "spread": false,
         "optional": false,
         "name": "keyAPI",
-        "description": "API Key is required to use all methods"
+        "description": "An API Key is required to use all methods"
       }
     ],
     "generator": false

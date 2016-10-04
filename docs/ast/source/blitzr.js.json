@@ -306,8 +306,8 @@
                               "arguments": [
                                 {
                                   "type": "Literal",
-                                  "value": "API Key is required to use Blitzr",
-                                  "raw": "'API Key is required to use Blitzr'",
+                                  "value": "An API Key is required to use Blitzr",
+                                  "raw": "'An API Key is required to use Blitzr'",
                                   "range": [
                                     377,
                                     412
@@ -12789,7 +12789,7 @@
               "leadingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * Create instance\n     * @param {string} keyAPI API Key is required to use all methods\n     ",
+                  "value": "*\n     * Create instance\n     * @param {string} keyAPI An API Key is required to use all methods\n     ",
                   "range": [
                     196,
                     299
@@ -18749,7 +18749,7 @@
     },
     {
       "type": "Block",
-      "value": "*\n     * Create instance\n     * @param {string} keyAPI API Key is required to use all methods\n     ",
+      "value": "*\n     * Create instance\n     * @param {string} keyAPI An API Key is required to use all methods\n     ",
       "range": [
         196,
         299
