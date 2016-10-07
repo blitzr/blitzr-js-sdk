@@ -12,10 +12,10 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH"];
     exit 0
 fi
 
-# if [ -z "$TRAVIS_TAG" ]; then
-#     echo "Not a tag, Skipping doc building"
-#     exit 0
-# fi
+if [ -z "$TRAVIS_TAG" ]; then
+    echo "Not a tag, Skipping doc building"
+    exit 0
+fi
 
 # Save some useful information
 REPO=`git config remote.origin.url`
