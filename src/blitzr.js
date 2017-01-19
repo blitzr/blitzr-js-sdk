@@ -34,9 +34,6 @@ export default class Blitzr {
          * @see http://blitzr.github.io/blitzr-js-sdk/index.html#usage
          */
         this.search = {
-            all(data) {
-                return self._sendToAPI('/search/', data);
-            },
             artist(data) {
                 return self._sendToAPI('/search/artist/', data);
             },
