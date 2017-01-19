@@ -29,13 +29,6 @@ describe('Request', function() {
 
     describe('#search', function() {
         const tests = [{
-            method: 'all',
-            url: '/search/',
-            queries: [{
-                query: 'the black keys',
-                type: 'artist, label, release, track'
-            }]
-        }, {
             method: 'artist',
             url: '/search/artist/',
             queries: [{
