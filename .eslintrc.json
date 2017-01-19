@@ -1,0 +1,104 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": "error",
+    "comma-dangle": [
+      "error",
+      "only-multiline"
+    ],
+    "no-console": "off",
+    "dot-notation": "error",
+    "eqeqeq": "error",
+    "yoda": [
+      "error",
+      "never"
+    ],
+    "block-spacing": "error",
+    "brace-style": "error",
+    "comma-spacing": "error",
+    "comma-style": "error",
+    "computed-property-spacing": "error",
+    "key-spacing": "error",
+    "keyword-spacing": "error",
+    "lines-around-comment": "error",
+    "max-depth": "warn",
+    "max-len": [
+      "warn",
+      160
+    ],
+    "max-nested-callbacks": [
+      "warn",
+      5
+    ],
+    "new-cap": [
+      "error",
+      {
+        "properties": false
+      }
+    ],
+    "new-parens": "error",
+    "no-nested-ternary": "error",
+    "no-spaced-func": "error",
+    "no-unneeded-ternary": "error",
+    "operator-assignment": "error",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "no-array-constructor": "error",
+    "array-callback-return": "error",
+    "arrow-body-style": "error",
+    "arrow-spacing": "error",
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "object-shorthand": "error",
+    "object-curly-spacing": [
+      "error",
+      "always",
+      {
+        "objectsInObjects": false
+      }
+    ],
+    "no-useless-constructor": "warn",
+    "prefer-const": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "space-before-blocks": "error",
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
+    "space-in-parens": "error",
+    "space-infix-ops": "error",
+    "spaced-comment": "error",
+    "no-loop-func": "error",
+    "prefer-arrow-callback": "error"
+  }
+}

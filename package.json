@@ -1,0 +1,60 @@
+{
+  "name": "blitzr-js-sdk",
+  "version": "1.3.0",
+  "description": "SDK javascript for blitzr API",
+  "main": "lib/index.js",
+  "scripts": {
+    "build:standalone": "browserify src/index.js -i xmlhttprequest -s Blitzr -t babelify | uglifyjs -o dist/blitzr.js",
+    "build:compile": "babel src -d lib",
+    "build": "npm run build:compile && npm run build:standalone",
+    "documentation": "esdoc -c ./esdoc.json",
+    "package": "eslint --quiet ./src && mocha --compilers js:babel-core/register --reporter='dot' ./test && npm run build",
+    "lint": "eslint ./src",
+    "test": "mocha --compilers js:babel-core/register",
+    "prepublish": "npm run package"
+  },
+  "browser": {
+    "./lib/xhr.js": "./lib/xhr-browser.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blitzr/blitzr-js-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/blitzr/blitzr-js-sdk/issues"
+  },
+  "keywords": [
+    "blitzr",
+    "API",
+    "js",
+    "javascript",
+    "module",
+    "plugin",
+    "SDK"
+  ],
+  "author": "Blitzr",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "esdoc": "^0.4.8",
+    "esdoc-importpath-plugin": "0.0.1",
+    "eslint": "^2.8.0",
+    "jsdom": "^9.1.0",
+    "mocha": "^2.4.5",
+    "mocha-jsdom": "^1.1.0",
+    "sinon": "^1.17.3",
+    "uglify-js": "^2.6.2"
+  },
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
+}
